@@ -4,9 +4,9 @@
 #include "Hw.h"
 
 
-#define GPIO_USART            GPIOA
-#define GPIO_USART_Rx_Pin     GPIO_Pin_10
-#define GPIO_USART_Tx_Pin     GPIO_Pin_9
+#define GPIO_USART1            GPIOA
+#define GPIO_USART1_Rx_Pin     GPIO_Pin_10
+#define GPIO_USART1_Tx_Pin     GPIO_Pin_9
 
 
 #ifdef USART_LOCAL

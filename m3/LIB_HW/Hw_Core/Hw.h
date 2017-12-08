@@ -11,6 +11,8 @@
 #include "Hw_Flash.h"
 //gpio header
 #include "Hw_Gpio.h"
+//usart header
+#include "Hw_Usart.h"
 
 
 #ifdef HW_LOCAL
