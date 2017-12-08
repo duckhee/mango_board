@@ -36,7 +36,7 @@ HW_NVIC_DEF void NVIC_Configuration(void)
     NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
     NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
     NVIC_Init(&NVIC_InitStructure);
-    
+
 }
 
 HW_NVIC_DEF void NVIC_SetPriority(IRQn_TypeDef IRQn, uint32_t priority)
@@ -54,7 +54,7 @@ HW_NVIC_DEF void NVIC_SetPriority(IRQn_TypeDef IRQn, uint32_t priority)
 HW_NVIC_DEF void NVIC_PriorityGroupConfig(uint32_t NVIC_PriorityGroup)
 {
     /* Set the PRIGROUP[10:8] bits according to NVIC_PriorityGroup value */
-    SCB->AIRCR = AIRCR_VECTKEY_MASK | NVIC_PriorityGroup;
+    SCB->AIRCR = NVIC_AIRCR_VECTKEY_MASK | NVIC_PriorityGroup;
 }
 
 HW_NVIC_DEF void NVIC_Init(NVIC_InitTypeDef* NVIC_InitStruct)
