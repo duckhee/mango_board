@@ -13,7 +13,12 @@
 #include "Hw_Gpio.h"
 //usart header
 #include "Hw_Usart.h"
+//adc header
+#include "Hw_ADC.h"
 
+
+//util header
+#include "Util.h"
 
 #ifdef HW_LOCAL
 #define HW_DEF

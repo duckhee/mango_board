@@ -27,8 +27,11 @@ SRC_MENU = ../Menu/Key_Menu.c              \
 
 SRC_HW = ../LIB_HW/Hw_Core/$(STARTUP_C)    \
 		 ../LIB_HW/Hw_Core/Hw.c            \
+		 ../LIB_HW/Hw_Core/Hw_Rcc.c        \
 		 ../LIB_HW/Hw_Core/Hw_Gpio.c       \
 		 ../LIB_HW/Hw_Core/Hw_Usart.c      \
+		 ../LIB_HW/Hw_Core/Hw_Flash.c      \
+		 ../LIB_HW/Hw_Core/Hw_ADC.c        \
 		 ../LIB_HW/Hw_Lib/Hw_Led.c         \
 		 ../LIB_HW/Hw_Lib/Hw_Key.c         \
          ../LIB_HW/Hw_Lib/Hw_Segment.c     \
@@ -37,7 +40,7 @@ SRC_LB = ../LIB/Ld_Printf.c                \
          ../LIB/Util.c
 
 #source file 
-SRC = $(SRC_AP) $(SRC_LB) $(SRC_HW) $(SRC_MENU)
+SRC = $(SRC_AP) $(SRC_LB) $(SRC_HW) #$(SRC_MENU)
 #thumb mode
 THUMB = -mthumb
 #include header

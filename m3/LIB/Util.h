@@ -1,7 +1,7 @@
 #ifndef __UTIL_H__
 #define __UTIL_H__
 
-#include "Ap.h"
+#include "Hw.h"
 
 #ifdef UTIL_LOCAL
 #define UTIL_DEF
