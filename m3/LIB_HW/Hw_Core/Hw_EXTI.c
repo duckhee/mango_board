@@ -61,31 +61,109 @@ EXTI_DEF void EXTI1_IRQHandler(void)
     }
 }
 
-EXTI_DEF void EXTI2_IRQHandler(void){}
+EXTI_DEF void EXTI2_IRQHandler(void)
+{
+    if(EXTI_GetITStatus(EXTI_LINE2) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_LINE2)
+    }
+}
 
-EXTI_DEF void EXTI3_IRQHandler(void){}
+EXTI_DEF void EXTI3_IRQHandler(void)
+{
+    if(EXTI_GetITStatus(EXTI_LINE3) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_Line3);
+    }
+}
 
-EXTI_DEF void EXTI4_IRQHandler(void){}
+EXTI_DEF void EXTI4_IRQHandler(void)
+{
+    if(EXTI_GetITStatus(EXTI_LINE4) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_LINE4);
+    }
+}
 
-EXTI_DEF void EXTI5_IRQHandler(void){}
+EXTI_DEF void EXTI5_IRQHandler(void)
+{
+    if(EXTI_GetITStatus(EXTI_LINE5) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_LINE5);
+    }
+}
 
-EXTI_DEF void EXTI6_IRQHandler(void){}
+EXTI_DEF void EXTI6_IRQHandler(void)
+{
+    if(EXTI_GetITStatus(EXTI_LINE6) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_LINE6);
+    }
+}
 
-EXTI_DEF void EXTI7_IRQHandler(void){}
+EXTI_DEF void EXTI7_IRQHandler(void)
+{
+    if(EXTI_GetITStatus(EXTI_LINE7) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_LINE7);
+    }
+}
 
-EXTI_DEF void EXTI8_IRQHandler(void){}
+EXTI_DEF void EXTI8_IRQHandler(void)
+{
+    if(EXTI_GetITStatus(EXTI_LINE8) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_LINE8);
+    }
+}
 
-EXTI_DEF void EXTI9_IRQHandler(void){}
+EXTI_DEF void EXTI9_IRQHandler(void)
+{
+    if(EXTI_GetITStatus(EXTI_LINE9) !+ RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_LINE9);
+    }
+}
 
-EXTI_DEF void EXTI10_IRQHandler(void){}
+EXTI_DEF void EXTI10_IRQHandler(void)
+{
+    if(EXTI_GetITStatus(EXTI_LINE10) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_LINE10);
+    }
+}
 
-EXTI_DEF void EXTI11_IRQHandler(void){}
+EXTI_DEF void EXTI11_IRQHandler(void)
+{
+    if(EXTI_GetITStatus(EXTI_LINE11) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_LINE11);
+    }
+}
 
-EXTI_DEF void EXTI12_IRQHandler(void){}
+EXTI_DEF void EXTI12_IRQHandler(void)
+{
+    if(EXTI_GetITStatus(EXTI_LINE12) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_LINE12);
+    }
+}
 
-EXTI_DEF void EXTI13_IRQHandler(void){}
+EXTI_DEF void EXTI13_IRQHandler(void)
+{
+    if(EXTI_GetITStatus(EXTI_LINE13) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_LINE13);
+    }
+}
 
-EXTI_DEF void EXTI14_IRQHandler(void){}
+EXTI_DEF void EXTI14_IRQHandler(void)
+{
+    if(EXTI_GetITStatus(EXTI_LINE14) != RESET)
+    {
+        EXTI_ClearITPendingBit(EXTI_LINE14);
+    }
+}
 
 EXTI_DEF void EXTI15_IRQHandler(void){}
 

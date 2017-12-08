@@ -6,6 +6,8 @@
 #define NVIC_VectTab_RAM             ((uint32_t)0x20000000)
 #define NVIC_VectTab_FLASH           ((uint32_t)0x08000000)
 
+#define NVIC_AIRCR_VECTKEY_MASK    ((uint32_t)0x05FA0000)
+
 #define __NVIC_PRIO_BITS              4
 
 #ifdef HW_NVIC_LOCAL
