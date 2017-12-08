@@ -3,6 +3,10 @@
 
 #include "Hw.h"
 
+//oscillator HSI
+#define RCC_HSI_Value                        ((uint32_t)8000000) /*!< Value of the Internal oscillator in Hz*/
+#define RCC_HSE_Value                        ((uint32_t)12000000)
+
 /********************  Bit definition for RCC_CR register  ********************/
 #define  RCC_CR_HSION                        ((uint32_t)0x00000001)        /*!< Internal High Speed clock enable */
 #define  RCC_CR_HSIRDY                       ((uint32_t)0x00000002)        /*!< Internal High Speed clock ready flag */
@@ -21,7 +25,21 @@
 #define SW_PLL_SYSCLOCK                      ((uint32_t)0x00000002)
 #define SW_NOT_ALLOWED                       ((uint32_t)0x00000003)
 //System clock mask
-#define SWS_MASK                             ((uint32_t)0x0000000C)
+#define RCC_SWS_MASK                         ((uint32_t)0x0000000C)
+//PLLMULL mask
+#define RCC_PLLMUL_MASK                      ((uint32_t)0x003C0000)
+//PLLSRC mask
+#define RCC_PLLSRC_MASK                      ((uint32_t)0x00010000)
+//PLLXTPRE mask
+#define RCC_PLLXTPRE_MASK                    ((uint32_t)0x00020000)
+//HPRE_SET mask
+#define RCC_HPRE_SET_MASK                    ((uint32_t)0x000000F0)
+//PPRE1 SET mask
+#define RCC_PPRE1_SET_MASK                   ((uint32_t)0x00000700)
+//PPRE2 SET mask
+#define RCC_PPRE2_SET_MASK                   ((uint32_t)0x00003800)
+//ADC PRE SET mask
+#define RCC_ADC_PRE_SET_MASK                 ((uint32_t)0x0000C000)
 //ADC PREscaler
 #define ADCPRE_PLCK2_DIVIDED2                ((uint32_t)0x00000000)
 #define ADCPRE_PLCK2_DIVIDED4                ((uint32_t)0x00004000)
@@ -124,10 +142,14 @@
 #define RCC_DEF              extern
 #endif
 
+static __I uint8_t APBAHBPrescTable[16] = {0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 6, 7, 8, 9};
+static __I uint8_t ADCPrescTable[4] = {2, 4, 6, 8};
+
 RCC_DEF void HSI_Init(void);
 RCC_DEF void HSE_Init(void);
 RCC_DEF void APB2Enable(uint32_t RCC_APB2Periph, FunctionalState NewState);
 RCC_DEF void APB1Enable(uint32_t RCC_APB1Periph, FunctionalState NewState);
 RCC_DEF void APBEnable(uint32_t RCC_APBPeriph, FunctionalState NewState);
+RCC_DEF void RCC_GetClocksFreq(RCC_ClocksTypeDef* RCC_Clocks);
 
 #endif

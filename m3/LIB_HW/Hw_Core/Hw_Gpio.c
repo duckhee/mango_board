@@ -68,13 +68,32 @@ GPIO_DEF void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)
               pinmask = ((uint32_t)0x0F) << pos;
               tmpreg &= ~pinmask;
               /* Write the mode configuration in the corresponding bits */
-              
+              tmpreg |= (currentmode << pos);
+              /* Reset the corresponding ODR bit */
+              if(GPIO_InitStruct->GPIO_Mode == GPIO_Mode_IPD)
+              {
+                  GPIOx->BRR = (((uint32_t)0x01) << (pinpos + 0x08));
+              }
+              /* Set the corresponding ODR bit */
+              if(GPIO_InitStruct->GPIO_Mode == GPIO_Mode_IPU)
+              {
+                  GPIOx->BSRR = (((uint32_t)0x01) << (pinpos + 0x08));
+              }
           }
       }
+      GPIOx->CRH = tmpreg;
   }
 }
 
 GPIO_DEF void GPIO_Configuratioin(void)
 {
-
+    GPIO_InitTypeDef GPIO_InitStructure;
+    GPIO_InitStructure.GPIO_Pin = GPIO_USART1_Tx_Pin;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+    GPIO_Init(GPIO_USART1, &GPIO_InitStructure);
+    GPIO_InitStructure.GPIO_Pin = GPIO_USART1_Rx_Pin;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
+    GPIO_Init(GPIO_USART1, &GPIO_InitStructure);
 }
