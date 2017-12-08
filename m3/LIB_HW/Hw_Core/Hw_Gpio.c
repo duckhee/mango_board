@@ -2,6 +2,7 @@
 
 #include "Hw_Gpio.h"
 
+GPIO_DEF uint8_t GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
 GPIO_DEF void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct);
 GPIO_DEF void GPIO_Configuratioin(void);
 
@@ -83,6 +84,20 @@ GPIO_DEF void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)
       }
       GPIOx->CRH = tmpreg;
   }
+}
+
+GPIO_DEF uint8_t GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+{
+    uint8_t bitStatus = 0x00;
+    if((GPIOx->IDR & GPIO_Pin) !== (uint32_t)Bit_RESET)
+    {
+        bitStatus = (uint8_t)Bit_SET;
+    }
+    else
+    {
+        bitStatus = (uint8_t)Bit_RESET;
+    }
+    return bitStatus;
 }
 
 GPIO_DEF void GPIO_Configuratioin(void)
