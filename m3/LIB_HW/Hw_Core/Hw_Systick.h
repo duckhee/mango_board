@@ -19,7 +19,7 @@
 #endif
 
 SYSTICK_DEF uint32_t Systick_Config(uint32_t ticks);
-
+SYSTICK_DEF void SysTick_Handler(void);
 
 
 
