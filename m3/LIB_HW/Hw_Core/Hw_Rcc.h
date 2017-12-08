@@ -68,10 +68,53 @@
 #define PLL_INPUT_MULT14                     ((uint32_t)0x00300000)
 #define PLL_INPUT_MULT15                     ((uint32_t)0x00340000)
 #define PLL_INPUT_MULT16                     ((uint32_t)0x00380000)
-#define PLL_INPUT_MULT2_16                     ((uint32_t)0x003C0000)
+#define PLL_INPUT_MULT2_16                   ((uint32_t)0x003C0000)
 
+//function enable get(APB)
+#define DMA1_ENABLE                          ((uint32_t)0x00000001)
+#define DMA2_ENABLE                          ((uint32_t)0x00000002)
+#define SRAM_ENABLE                          ((uint32_t)0x00000004)
+#define FLIT_ENABLE                          ((uint32_t)0x00000010)
+#define CRC_ENABLE                           ((uint32_t)0x00000040)
+#define OTGFS_ENABLE                         ((uint32_t)0x00001000)
+#define ETHMAC_ENABLE                        ((uint32_t)0x00004000)
+#define ETHMACTX_ENABLE                      ((uint32_t)0x00008000)
+#define ETHMACRX_ENABLE                      ((uint32_t)0x00010000)
 
+//function enable get(APB2)
+#define AFIO_ENABLE                          ((uint32_t)0x00000001)
+#define IOPORT_A_ENABLE                      ((uint32_t)0x00000004)
+#define IOPORT_B_ENABLE                      ((uint32_t)0x00000008)
+#define IOPORT_C_ENABLE                      ((uint32_t)0x00000010)
+#define IOPORT_D_ENABLE                      ((uint32_t)0x00000020)
+#define IOPORT_E_ENABLE                      ((uint32_t)0x00000040)
+#define ADC1_ENABLE                          ((uint32_t)0x00000200)
+#define ADC2_ENABLE                          ((uint32_t)0x00000400)
+#define TIM1_ENABLE                          ((uint32_t)0x00000800)
+#define SPI1_ENABLE                          ((uint32_t)0x00001000)
+#define USART1_ENABLE                        ((uint32_t)0x00004000)
 
+//function enable get(APB1)
+#define TIM2_ENABLE                          ((uint32_t)0x00000001)
+#define TIM3_ENABLE                          ((uint32_t)0x00000002)
+#define TIM4_ENABLE                          ((uint32_t)0x00000004)
+#define TIM5_ENABLE                          ((uint32_t)0x00000008)
+#define TIM6_ENABLE                          ((uint32_t)0x00000010)
+#define TIM7_ENABLE                          ((uint32_t)0x00000020)
+#define WWDG_ENABLE                          ((uint32_t)0x00001000)
+#define SPI2_ENABLE                          ((uint32_t)0x00004000)
+#define SPI3_ENABLE                          ((uint32_t)0x00008000)
+#define USART2_ENABLE                        ((uint32_t)0x00020000)
+#define USART3_ENABLE                        ((uint32_t)0x00040000)
+#define USART4_ENABLE                        ((uint32_t)0x00080000)
+#define USART5_ENABLE                        ((uint32_t)0x00100000)
+#define I2C1_ENABLE                          ((uint32_t)0x00200000)
+#define I2C2_ENABLE                          ((uint32_t)0x00400000)
+#define CAN1_ENABLE                          ((uint32_t)0x02000000)
+#define CAN2_ENABLE                          ((uint32_t)0x04000000)
+#define BKP_ENABLE                           ((uint32_t)0x08000000)
+#define PWR_ENABLE                           ((uint32_t)0x10000000)
+#define DAC_ENABLE                           ((uint32_t)0x20000000)
 
 
 
@@ -83,6 +126,8 @@
 
 RCC_DEF void HSI_Init(void);
 RCC_DEF void HSE_Init(void);
-
+RCC_DEF void APB2Enable(uint32_t RCC_APB2Periph, FunctionalState NewState);
+RCC_DEF void APB1Enable(uint32_t RCC_APB1Periph, FunctionalState NewState);
+RCC_DEF void APBEnable(uint32_t RCC_APBPeriph, FunctionalState NewState);
 
 #endif

@@ -80,3 +80,39 @@ RCC_DEF void HSE_Init(void)
         ; //조건을 만족하면 여기 pll 준비가 안되어 있다는 것
     }
 }
+RCC_DEF void APB2Enable(uint32_t RCC_APB2Periph, FunctionalState NewState)
+{
+    if(NewState != DISABLE)
+    {
+        RCC->APB2ENR |= RCC_APB2Periph;
+    }
+    else
+    {
+        RCC->APB2ENR &= ~RCC_APB2Periph;
+    }
+}
+
+RCC_DEF void APB1Enable(uint32_t RCC_APB1Periph, FunctionalState NewState)
+{
+    if(NewState != DISABLE)
+    {
+        RCC->APB1ENR |= RCC_APB1Periph;
+    }
+    else
+    {
+        RCC->APB1ENR &= ~RCC_APB1Periph;
+    }
+}
+
+RCC_DEF void APBEnable(uint32_t RCC_APBPeriph, FunctionalState NewState)
+{
+    if(NewState != DISABLE)
+    {
+        RCC->APBENR |= RCC_APBPeriph;
+    }
+    else
+    {
+        RCC->APBENR &= ~RCC_APBPeriph;
+    }
+}
+
