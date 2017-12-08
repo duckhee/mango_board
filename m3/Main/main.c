@@ -2,5 +2,6 @@
 
 int main()
 {
-    
+    Hw_Init();
+    printf("testing!\n");
 }
