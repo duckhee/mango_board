@@ -33,7 +33,7 @@ SRC_HW = ../LIB_HW/Hw_Core/$(STARTUP_C)    \
 		 ../LIB_HW/Hw_Core/Hw_Flash.c      \
 		 ../LIB_HW/Hw_Core/Hw_ADC.c        \
 		 ../LIB_HW/Hw_Lib/Hw_Led.c         \
-		 ../LIB_HW/Hw_Lib/Hw_Key.c         \
+		 #../LIB_HW/Hw_Lib/Hw_Key.c         \
          ../LIB_HW/Hw_Lib/Hw_Segment.c     \
 
 SRC_LB = ../LIB/Ld_Printf.c                \
@@ -55,23 +55,20 @@ OBJNM = $(PREFIX)nm
 SIZE = $(PREFIX)size
 REMOVE = $(REMOVE_CMD) -rf
 
+
 CFLAGS  = -gdwarf-2 -O2 -mcpu=cortex-m3 -mthumb-interwork -DSTM32F10X_MD 
 #CFLAGS += $(INCLUDE) -mlong-calls -ffunction-sections -fdata-sections -fpromote-loop-indices -Wall -Wextra -Wimplicit -Wcast-align -Wpointer-arith -Wredundant-decls 
 CFLAGS += $(INCLUDE) -mlong-calls -ffunction-sections -fdata-sections -Wall -Wextra -Wimplicit -Wcast-align -Wpointer-arith -Wredundant-decls 
 CFLAGS += -Wshadow -Wcast-qual -Wcast-align -Wa,-adhlns=start_stm32f10x.lst -MD -MP -MF $(TARGET).elf.d
-#$(patsubst pattern, replacement, teext)
-#test안에서 공백문자로 분리된 단어들 중 patern과 매치된ㄴ 단어를 찾아서 그거들을 replacement로변경한다. 와일드 카드인 %를 가질수 있다.
-#$(patsubst %.c, %.o,, x.c.c bar.c)
-#'x.c.o bar.o'라는 값을 만든다. 대입참조 (see section 대입참조)는 patsubst 의 효과를 얻는 더 단순한 방법이다.
 CFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
 #무엇인지 확인
 CONLYFLAGS += -Wnested-externs 
 CONLYFLAGS += -std=gnu99
 #이게 맞는지?
-LDFLAGS = -static -nostdlib -nostartfiles -Wl,-Map=$(TARGET).map,--cref,--gc-sections -L./ -lc  -lm  -lc -lgcc -T.//stm32f10x.ld
+LDFLAGS = -static -nostdlib -nostartfiles -Wl,-Map=$(TARGET).map,--cref,--gc-sections -L./ -lc  -lm  -lc -lgcc -T.//STM32F10x_128k_20k_flash.ld
 #ELF32_LDFLAGS = -Wl,-T,stm32f10x.ld
 
-
+ELFSIZE = $(SIZE) -A $(TARGET).elf
 
 # Define Messages
 # English
@@ -93,7 +90,7 @@ ALLOBJ = $(addsuffix .o, $(ALLSRCBASE))
 
 
 # Default target.
-all: createdirs build
+all: createdirs build sizeinfo gcc_version
 
 elf: $(TARGET).elf
 lss: $(TARGET).lss 
@@ -103,6 +100,14 @@ bin: $(TARGET).bin
 
 
 build: elf hex bin lss sym
+
+sizeinfo:
+	@echo code size $@
+	$(ELFSIZE)
+
+gcc_version:
+	@echo gcc version make $@
+	$(CC) --version
 
 # Create output directories.
 createdirs:
@@ -151,6 +156,7 @@ $(foreach src, $(SRC), $(eval $(call COMPILE_C_TEMPLATE, $(src))))
 $(SRC:.c=.s) : %.s : %.c
 	@echo $(MSG_ASMFROMC) $< to $@
 	$(CC) $(THUMB) -S $(CFLAGS) $(CONLYFLAGS) $< -o $@
+	
 
 ###################################################################################################
 ###################################################################################################
@@ -179,9 +185,9 @@ clean_list :
 	$(REMOVE) $(LSTFILES)
 	$(REMOVE) $(DEPFILES)
 	$(REMOVE) $(SRC:.c=.s)
+	$(REMOVE) *.lst
 	$(REMOVE) NUL
-	$(REMOVE) start_stm32f10x.lst
-	$(REMOVE) NUL
+	
 
 # Create object files directory
 ##$(shell mkdir $(OBJDIR) 2>/dev/null)
@@ -192,5 +198,5 @@ clean_list :
 
 # Listing of phony targets.
 .PHONY : all finish \
-build elf hex bin lss sym clean clean_list createdirs
+build elf hex bin lss sym clean clean_list createdirs sizeinfo
 

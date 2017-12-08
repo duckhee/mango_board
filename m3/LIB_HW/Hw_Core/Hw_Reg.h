@@ -7,25 +7,38 @@
 #define     __O     volatile                  /*!< defines 'write only' permissions     */
 #define     __IO    volatile                  /*!< defines 'read / write' permissions   */
 
+typedef enum
+{
+    Bit_RESET = 0,
+    Bit_SET
+} BitAction;
 
 typedef enum { 
-    RESET = 0, SET   = !RESET 
+    RESET = 0,
+    SET   = !RESET
 } FlagStatus, ITStatus;
 
 typedef enum {
-    DISABLE = 0, ENABLE  = !DISABLE
+    DISABLE = 0,
+    ENABLE  = !DISABLE
 } FunctionalState;
 
 
 #define FLASH_BASE            ((uint32_t)0x08000000) /*!< FLASH base address in the alias region */
 #define SRAM_BASE             ((uint32_t)0x20000000) /*!< SRAM base address in the alias region */
 #define PERIPH_BASE           ((uint32_t)0x40000000) /*!< SRAM base address in the bit-band region */
+#define SCS_BASE              (0xE000E000)                              /*!< System Control Space Base Address    */
+#define SysTick_BASE          (SCS_BASE +  0x0010)                      /*!< SysTick Base Address                 */
+#define NVIC_BASE             (SCS_BASE +  0x0100)                      /*!< NVIC Base Address                    */
+#define SCB_BASE              (SCS_BASE +  0x0D00)                      /*!< System Control Block Base Address    */
 
 /*!< Peripheral memory map */
 #define APB1PERIPH_BASE       PERIPH_BASE
 #define APB2PERIPH_BASE       (PERIPH_BASE + 0x10000)
 #define AHBPERIPH_BASE        (PERIPH_BASE + 0x20000)
 //base define
+#define AFIO_BASE             (APB2PERIPH_BASE + 0x0000)
+#define EXTI_BASE             (APB2PERIPH_BASE + 0x0400)
 #define RCC_BASE              (AHBPERIPH_BASE + 0x1000)
 #define FLASH_R_BASE          (AHBPERIPH_BASE + 0x2000) /*!< Flash registers base address */
 #define GPIOA_BASE            (APB2PERIPH_BASE + 0x0800)
@@ -113,6 +126,15 @@ typedef struct
 
 typedef struct
 {
+  __IO uint32_t EVCR;
+  __IO uint32_t MAPR;
+  __IO uint32_t EXTICR[4];
+} AFIO_TypeDef;
+//alternate function struct
+
+
+typedef struct
+{
   __IO uint32_t CRL;
   __IO uint32_t CRH;
   __IO uint32_t IDR;
@@ -120,7 +142,7 @@ typedef struct
   __IO uint32_t BSRR;
   __IO uint32_t BRR;
   __IO uint32_t LCKR;
-}GPIO_TypeDef;
+} GPIO_TypeDef;
 //GPIO struct
 
 typedef enum
@@ -132,20 +154,21 @@ typedef enum
   GPIO_Mode_Out_PP = 0x10,
   GPIO_Mode_AF_OD = 0x1C,
   GPIO_Mode_AF_PP = 0x18
-}GPIOMode_TypeDef;
+} GPIOMode_TypeDef;
 
 typedef enum
 { 
   GPIO_Speed_10MHz = 1,
   GPIO_Speed_2MHz, 
   GPIO_Speed_50MHz
-}GPIOSpeed_TypeDef;
+} GPIOSpeed_TypeDef;
+
 typedef struct
 {
   uint16_t GPIO_Pin;
   GPIOSpeed_TypeDef GPIO_Speed;
   GPIOMode_TypeDef GPIO_Mode;
-}GPIO_InitTypeDef;
+} GPIO_InitTypeDef;
 //gpio mode or speed pin set
 
 typedef struct
@@ -166,6 +189,7 @@ typedef struct
   uint16_t  RESERVED6;
 } USART_TypeDef;
 //usart typ defintion
+
 typedef struct
 {
   uint32_t USART_BaudRate;            /*!< This member configures the USART communication baud rate.
@@ -195,6 +219,92 @@ typedef struct
 } USART_InitTypeDef;
 //usart baud rate or parity stop bit mode set
 
+typedef struct
+{
+  __IO uint32_t ISER[8];                      /*!< Interrupt Set Enable Register            */
+       uint32_t RESERVED0[24];
+  __IO uint32_t ICER[8];                      /*!< Interrupt Clear Enable Register          */
+       uint32_t RSERVED1[24];
+  __IO uint32_t ISPR[8];                      /*!< Interrupt Set Pending Register           */
+       uint32_t RESERVED2[24];
+  __IO uint32_t ICPR[8];                      /*!< Interrupt Clear Pending Register         */
+       uint32_t RESERVED3[24];
+  __IO uint32_t IABR[8];                      /*!< Interrupt Active bit Register            */
+       uint32_t RESERVED4[56];
+  __IO uint8_t  IP[240];                      /*!< Interrupt Priority Register, 8Bit wide   */
+       uint32_t RESERVED5[644];
+  __O  uint32_t STIR;                         /*!< Software Trigger Interrupt Register      */
+}  NVIC_TypeDef;
+
+typedef struct
+{
+  uint8_t NVIC_IRQChannel;                    /*!< Specifies the IRQ channel to be enabled or disabled.
+                                                   This parameter can be a value of @ref IRQn_Type 
+                                                   (For the complete STM32 Devices IRQ Channels list, please
+                                                    refer to stm32f10x.h file) */
+
+  uint8_t NVIC_IRQChannelPreemptionPriority;  /*!< Specifies the pre-emption priority for the IRQ channel
+                                                   specified in NVIC_IRQChannel. This parameter can be a value
+                                                   between 0 and 15 as described in the table @ref NVIC_Priority_Table */
+
+  uint8_t NVIC_IRQChannelSubPriority;         /*!< Specifies the subpriority level for the IRQ channel specified
+                                                   in NVIC_IRQChannel. This parameter can be a value
+                                                   between 0 and 15 as described in the table @ref NVIC_Priority_Table */
+
+  FunctionalState NVIC_IRQChannelCmd;         /*!< Specifies whether the IRQ channel defined in NVIC_IRQChannel
+                                                   will be enabled or disabled. 
+                                                   This parameter can be set either to ENABLE or DISABLE */   
+} NVIC_InitTypeDef;
+//NVIC Init
+
+/* memory mapping struct for System Control Block */
+typedef struct
+{
+  __I  uint32_t CPUID;                        /*!< CPU ID Base Register                                     */
+  __IO uint32_t ICSR;                         /*!< Interrupt Control State Register                         */
+  __IO uint32_t VTOR;                         /*!< Vector Table Offset Register                             */
+  __IO uint32_t AIRCR;                        /*!< Application Interrupt / Reset Control Register           */
+  __IO uint32_t SCR;                          /*!< System Control Register                                  */
+  __IO uint32_t CCR;                          /*!< Configuration Control Register                           */
+  __IO uint8_t  SHP[12];                      /*!< System Handlers Priority Registers (4-7, 8-11, 12-15)    */
+  __IO uint32_t SHCSR;                        /*!< System Handler Control and State Register                */
+  __IO uint32_t CFSR;                         /*!< Configurable Fault Status Register                       */
+  __IO uint32_t HFSR;                         /*!< Hard Fault Status Register                               */
+  __IO uint32_t DFSR;                         /*!< Debug Fault Status Register                              */
+  __IO uint32_t MMFAR;                        /*!< Mem Manage Address Register                              */
+  __IO uint32_t BFAR;                         /*!< Bus Fault Address Register                               */
+  __IO uint32_t AFSR;                         /*!< Auxiliary Fault Status Register                          */
+  __I  uint32_t PFR[2];                       /*!< Processor Feature Register                               */
+  __I  uint32_t DFR;                          /*!< Debug Feature Register                                   */
+  __I  uint32_t ADR;                          /*!< Auxiliary Feature Register                               */
+  __I  uint32_t MMFR[4];                      /*!< Memory Model Feature Register                            */
+  __I  uint32_t ISAR[5];                      /*!< ISA Feature Register                                     */
+} SCB_TypeDef;
+
+/* memory mapping struct for SysTick */
+typedef struct
+{
+  __IO uint32_t CTRL;                         /*!< SysTick Control and Status Register */
+  __IO uint32_t LOAD;                         /*!< SysTick Reload Value Register       */
+  __IO uint32_t VAL;                          /*!< SysTick Current Value Register      */
+  __I  uint32_t CALIB;                        /*!< SysTick Calibration Register        */
+} SysTick_TypeDef;
+
+/** 
+  * @brief External Interrupt/Event Controller
+  */
+
+typedef struct
+{
+  __IO uint32_t IMR;
+  __IO uint32_t EMR;
+  __IO uint32_t RTSR;
+  __IO uint32_t FTSR;
+  __IO uint32_t SWIER;
+  __IO uint32_t PR;
+} EXTI_TypeDef;
+
+
 //rcc config
 #define RCC                 ((RCC_TypeDef *) RCC_BASE)
 //flash config
@@ -214,6 +324,17 @@ typedef struct
 //ADC config
 #define ADC1                ((ADC_TypeDef *) ADC1_BASE)
 #define ADC2                ((ADC_TypeDef *) ADC2_BASE)
+//SCB config
+#define SCB                 ((SCB_TypeDef *) SCB_BASE)         /*!< SCB configuration struct             */
+//SysTick config
+#define SysTick             ((SysTick_TypeDef *) SysTick_BASE)     /*!< SysTick configuration struct         */
+//NESTED VECTORED INTERRUPT CONTROLLER config
+#define NVIC                ((NVIC_TypeDef *) NVIC_BASE)        /*!< NVIC configuration struct            */
+//brief External Interrupt/Event Controller
+#define EXTI                ((EXTI_TypeDef *) EXTI_BASE)
+
+
+#define AFIO                ((AFIO_TypeDef *) AFIO_BASE)
 
 
 #endif

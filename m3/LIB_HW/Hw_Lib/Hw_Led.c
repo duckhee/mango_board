@@ -47,7 +47,7 @@ HW_LED_DEF void LED_ALL_On(void)
 HW_LED_DEF void LED_ALL_Off(void)
 {
     LED_RED_Off();
-    LED_YELLOW_Off);
+    LED_YELLOW_Off();
     LED_BLUE_Off();
 }
 HW_LED_DEF void LED_MULT_OnOff(uint32_t count)
