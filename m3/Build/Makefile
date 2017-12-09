@@ -22,16 +22,19 @@ SRC_AP =   ../LIB_AP/Ap_Core/Get_clock.c    \
            ../Main/main.c                   
 
 
-SRC_MENU = ../Menu/Key_Menu.c              \
-           ../Menu/Led_Menu.c              
+SRC_MENU = ../MENU/menu_command.c              \
+           ../MENU/led_command.c              
 
 SRC_HW = ../LIB_HW/Hw_Core/$(STARTUP_C)    \
 		 ../LIB_HW/Hw_Core/Hw.c            \
 		 ../LIB_HW/Hw_Core/Hw_Rcc.c        \
 		 ../LIB_HW/Hw_Core/Hw_Gpio.c       \
+		 ../LIB_HW/Hw_Core/Hw_NVIC.c       \
+		 ../LIB_HW/Hw_Core/Hw_EXTI.c       \
 		 ../LIB_HW/Hw_Core/Hw_Usart.c      \
 		 ../LIB_HW/Hw_Core/Hw_Flash.c      \
 		 ../LIB_HW/Hw_Core/Hw_ADC.c        \
+		 ../LIB_HW/Hw_Core/Hw_Systick.c    \
 		 ../LIB_HW/Hw_Lib/Hw_Led.c         \
 		 #../LIB_HW/Hw_Lib/Hw_Key.c         \
          ../LIB_HW/Hw_Lib/Hw_Segment.c     \
@@ -40,7 +43,7 @@ SRC_LB = ../LIB/Ld_Printf.c                \
          ../LIB/Util.c
 
 #source file 
-SRC = $(SRC_AP) $(SRC_LB) $(SRC_HW) #$(SRC_MENU)
+SRC = $(SRC_AP) $(SRC_LB) $(SRC_HW) $(SRC_MENU)
 #thumb mode
 THUMB = -mthumb
 #include header
@@ -65,7 +68,7 @@ CFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
 CONLYFLAGS += -Wnested-externs 
 CONLYFLAGS += -std=gnu99
 #이게 맞는지?
-LDFLAGS = -static -nostdlib -nostartfiles -Wl,-Map=$(TARGET).map,--cref,--gc-sections -L./ -lc  -lm  -lc -lgcc -T.//STM32F10x_128k_20k_flash.ld
+LDFLAGS = -static -nostdlib -nostartfiles -Wl,-Map=$(TARGET).map,--cref,--gc-sections -L./ -lc  -lm  -lc -lgcc -T.//stm32f10x_flash.ld
 #ELF32_LDFLAGS = -Wl,-T,stm32f10x.ld
 
 ELFSIZE = $(SIZE) -A $(TARGET).elf

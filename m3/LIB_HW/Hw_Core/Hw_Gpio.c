@@ -89,7 +89,7 @@ GPIO_DEF void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)
 GPIO_DEF uint8_t GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
 {
     uint8_t bitStatus = 0x00;
-    if((GPIOx->IDR & GPIO_Pin) !== (uint32_t)Bit_RESET)
+    if((GPIOx->IDR & GPIO_Pin) != (uint32_t)Bit_RESET)
     {
         bitStatus = (uint8_t)Bit_SET;
     }

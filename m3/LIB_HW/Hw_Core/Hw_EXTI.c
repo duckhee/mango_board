@@ -65,7 +65,7 @@ EXTI_DEF void EXTI2_IRQHandler(void)
 {
     if(EXTI_GetITStatus(EXTI_LINE2) != RESET)
     {
-        EXTI_ClearITPendingBit(EXTI_LINE2)
+        EXTI_ClearITPendingBit(EXTI_LINE2);
     }
 }
 
@@ -73,7 +73,7 @@ EXTI_DEF void EXTI3_IRQHandler(void)
 {
     if(EXTI_GetITStatus(EXTI_LINE3) != RESET)
     {
-        EXTI_ClearITPendingBit(EXTI_Line3);
+        EXTI_ClearITPendingBit(EXTI_LINE3);
     }
 }
 
@@ -119,7 +119,7 @@ EXTI_DEF void EXTI8_IRQHandler(void)
 
 EXTI_DEF void EXTI9_IRQHandler(void)
 {
-    if(EXTI_GetITStatus(EXTI_LINE9) !+ RESET)
+    if(EXTI_GetITStatus(EXTI_LINE9) != RESET)
     {
         EXTI_ClearITPendingBit(EXTI_LINE9);
     }

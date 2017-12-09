@@ -15,8 +15,12 @@
 #include "Hw_Usart.h"
 //adc header
 #include "Hw_ADC.h"
+//Systick header
+#include "Hw_Systick.h"
 //NVIC header
 #include "Hw_NVIC.h"
+//EXTI header
+#include "Hw_EXTI.h"
 //systick header
 #include "Hw_Systick.h"
 
