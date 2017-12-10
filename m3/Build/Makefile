@@ -18,8 +18,8 @@ EXTRAINCDIRS = ../LIB                       \
 			   ../MENU                      \
 	           ../Main
 
-SRC_AP =   ../LIB_AP/Ap_Core/Get_clock.c    \
-           ../Main/main.c                   
+SRC_AP =      ../Main/main.c               \
+              #../LIB_AP/Ap_Core/Get_clock.c    \
 
 
 SRC_MENU = ../Menu/Key_Menu.c              \
