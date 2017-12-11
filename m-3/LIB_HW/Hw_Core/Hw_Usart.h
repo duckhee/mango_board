@@ -43,9 +43,11 @@
 //usart CR3 clear mask
 #define USART_CR3_CLEAR_MASK                 ((uint16_t)0xFCFF)
 /* USART OverSampling-8 Mask */
-#define USART_OVER8_Set             ((uint16_t)0x8000)  /* USART OVER8 mode Enable Mask */
-#define USART_OVER8_Reset           ((uint16_t)0x7FFF)  /* USART OVER8 mode Disable Mask */
+#define USART_OVER8_Set                      ((uint16_t)0x8000)  /* USART OVER8 mode Enable Mask */
+#define USART_OVER8_Reset                    ((uint16_t)0x7FFF)  /* USART OVER8 mode Disable Mask */
 
+#define USART_CR1_SET                        ((uint16_t)0x2000)
+#define USART_CR1_RESET                      ((uint16_t)0xDFFF)
 
 
 #ifdef HW_USART_LOCAL
@@ -59,5 +61,6 @@ HW_USART_DEF void USART_Init(USART_TypeDef* USARTx, USART_InitTypeDef* USART_Ini
 HW_USART_DEF uint16_t USART_ReceiveData(USART_TypeDef* USARTx);
 HW_USART_DEF void USART_SendData(USART_TypeDef* USARTx, uint16_t Data);
 HW_USART_DEF FlagStatus USART_GetFlagStatus(USART_TypeDef* USARTx, uint16_t USART_FLAG);
+HW_USART_DEF void USART_Start_Cmd(USART_TypeDef* USARTx, FunctionalState NewStatue);
 
 #endif

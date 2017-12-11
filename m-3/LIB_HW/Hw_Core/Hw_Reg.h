@@ -234,6 +234,51 @@ typedef struct
 
 typedef struct
 {
+  __IO uint16_t CR1;
+  uint16_t  RESERVED0;
+  __IO uint16_t CR2;
+  uint16_t  RESERVED1;
+  __IO uint16_t OAR1;
+  uint16_t  RESERVED2;
+  __IO uint16_t OAR2;
+  uint16_t  RESERVED3;
+  __IO uint16_t DR;
+  uint16_t  RESERVED4;
+  __IO uint16_t SR1;
+  uint16_t  RESERVED5;
+  __IO uint16_t SR2;
+  uint16_t  RESERVED6;
+  __IO uint16_t CCR;
+  uint16_t  RESERVED7;
+  __IO uint16_t TRISE;
+  uint16_t  RESERVED8;
+} I2C_TypeDef;
+
+
+typedef struct
+{
+  __IO uint16_t CR1;
+  uint16_t  RESERVED0;
+  __IO uint16_t CR2;
+  uint16_t  RESERVED1;
+  __IO uint16_t SR;
+  uint16_t  RESERVED2;
+  __IO uint16_t DR;
+  uint16_t  RESERVED3;
+  __IO uint16_t CRCPR;
+  uint16_t  RESERVED4;
+  __IO uint16_t RXCRCR;
+  uint16_t  RESERVED5;
+  __IO uint16_t TXCRCR;
+  uint16_t  RESERVED6;
+  __IO uint16_t I2SCFGR;
+  uint16_t  RESERVED7;
+  __IO uint16_t I2SPR;
+  uint16_t  RESERVED8;  
+} SPI_TypeDef;
+
+typedef struct
+{
   __IO uint32_t ISER[8];                      /*!< Interrupt Set Enable Register            */
        uint32_t RESERVED0[24];
   __IO uint32_t ICER[8];                      /*!< Interrupt Clear Enable Register          */
@@ -452,6 +497,166 @@ typedef struct
   __IO uint32_t PR;
 } EXTI_TypeDef;
 
+typedef struct
+{
+  __IO uint16_t CR1;
+  uint16_t  RESERVED0;
+  __IO uint16_t CR2;
+  uint16_t  RESERVED1;
+  __IO uint16_t SMCR;
+  uint16_t  RESERVED2;
+  __IO uint16_t DIER;
+  uint16_t  RESERVED3;
+  __IO uint16_t SR;
+  uint16_t  RESERVED4;
+  __IO uint16_t EGR;
+  uint16_t  RESERVED5;
+  __IO uint16_t CCMR1;
+  uint16_t  RESERVED6;
+  __IO uint16_t CCMR2;
+  uint16_t  RESERVED7;
+  __IO uint16_t CCER;
+  uint16_t  RESERVED8;
+  __IO uint16_t CNT;
+  uint16_t  RESERVED9;
+  __IO uint16_t PSC;
+  uint16_t  RESERVED10;
+  __IO uint16_t ARR;
+  uint16_t  RESERVED11;
+  __IO uint16_t RCR;
+  uint16_t  RESERVED12;
+  __IO uint16_t CCR1;
+  uint16_t  RESERVED13;
+  __IO uint16_t CCR2;
+  uint16_t  RESERVED14;
+  __IO uint16_t CCR3;
+  uint16_t  RESERVED15;
+  __IO uint16_t CCR4;
+  uint16_t  RESERVED16;
+  __IO uint16_t BDTR;
+  uint16_t  RESERVED17;
+  __IO uint16_t DCR;
+  uint16_t  RESERVED18;
+  __IO uint16_t DMAR;
+  uint16_t  RESERVED19;
+} TIM_TypeDef;
+
+typedef struct
+{
+  uint16_t TIM_Prescaler;         /*!< Specifies the prescaler value used to divide the TIM clock.
+                                       This parameter can be a number between 0x0000 and 0xFFFF */
+
+  uint16_t TIM_CounterMode;       /*!< Specifies the counter mode.
+                                       This parameter can be a value of @ref TIM_Counter_Mode */
+
+  uint16_t TIM_Period;            /*!< Specifies the period value to be loaded into the active
+                                       Auto-Reload Register at the next update event.
+                                       This parameter must be a number between 0x0000 and 0xFFFF.  */
+
+  uint16_t TIM_ClockDivision;     /*!< Specifies the clock division.
+                                      This parameter can be a value of @ref TIM_Clock_Division_CKD */
+
+  uint8_t TIM_RepetitionCounter;  /*!< Specifies the repetition counter value. Each time the RCR downcounter
+                                       reaches zero, an update event is generated and counting restarts
+                                       from the RCR value (N).
+                                       This means in PWM mode that (N+1) corresponds to:
+                                          - the number of PWM periods in edge-aligned mode
+                                          - the number of half PWM period in center-aligned mode
+                                       This parameter must be a number between 0x00 and 0xFF.
+                                       @note This parameter is valid only for TIM1 and TIM8. */
+} TIM_TimeBaseInitTypeDef;
+
+typedef struct
+{
+  uint16_t TIM_OCMode;        /*!< Specifies the TIM mode.
+                                   This parameter can be a value of @ref TIM_Output_Compare_and_PWM_modes */
+
+  uint16_t TIM_OutputState;   /*!< Specifies the TIM Output Compare state.
+                                   This parameter can be a value of @ref TIM_Output_Compare_state */
+
+  uint16_t TIM_OutputNState;  /*!< Specifies the TIM complementary Output Compare state.
+                                   This parameter can be a value of @ref TIM_Output_Compare_N_state
+                                   @note This parameter is valid only for TIM1 and TIM8. */
+
+  uint16_t TIM_Pulse;         /*!< Specifies the pulse value to be loaded into the Capture Compare Register.
+                                   This parameter can be a number between 0x0000 and 0xFFFF */
+
+  uint16_t TIM_OCPolarity;    /*!< Specifies the output polarity.
+                                   This parameter can be a value of @ref TIM_Output_Compare_Polarity */
+
+  uint16_t TIM_OCNPolarity;   /*!< Specifies the complementary output polarity.
+                                   This parameter can be a value of @ref TIM_Output_Compare_N_Polarity
+                                   @note This parameter is valid only for TIM1 and TIM8. */
+
+  uint16_t TIM_OCIdleState;   /*!< Specifies the TIM Output Compare pin state during Idle state.
+                                   This parameter can be a value of @ref TIM_Output_Compare_Idle_State
+                                   @note This parameter is valid only for TIM1 and TIM8. */
+
+  uint16_t TIM_OCNIdleState;  /*!< Specifies the TIM Output Compare pin state during Idle state.
+                                   This parameter can be a value of @ref TIM_Output_Compare_N_Idle_State
+                                   @note This parameter is valid only for TIM1 and TIM8. */
+} TIM_OCInitTypeDef;
+
+typedef struct
+{
+
+  uint16_t TIM_Channel;      /*!< Specifies the TIM channel.
+                                  This parameter can be a value of @ref TIM_Channel */
+
+  uint16_t TIM_ICPolarity;   /*!< Specifies the active edge of the input signal.
+                                  This parameter can be a value of @ref TIM_Input_Capture_Polarity */
+
+  uint16_t TIM_ICSelection;  /*!< Specifies the input.
+                                  This parameter can be a value of @ref TIM_Input_Capture_Selection */
+
+  uint16_t TIM_ICPrescaler;  /*!< Specifies the Input Capture Prescaler.
+                                  This parameter can be a value of @ref TIM_Input_Capture_Prescaler */
+
+  uint16_t TIM_ICFilter;     /*!< Specifies the input capture filter.
+                                  This parameter can be a number between 0x0 and 0xF */
+} TIM_ICInitTypeDef;
+
+typedef struct
+{
+
+  uint16_t TIM_OSSRState;        /*!< Specifies the Off-State selection used in Run mode.
+                                      This parameter can be a value of @ref OSSR_Off_State_Selection_for_Run_mode_state */
+
+  uint16_t TIM_OSSIState;        /*!< Specifies the Off-State used in Idle state.
+                                      This parameter can be a value of @ref OSSI_Off_State_Selection_for_Idle_mode_state */
+
+  uint16_t TIM_LOCKLevel;        /*!< Specifies the LOCK level parameters.
+                                      This parameter can be a value of @ref Lock_level */
+
+  uint16_t TIM_DeadTime;         /*!< Specifies the delay time between the switching-off and the
+                                      switching-on of the outputs.
+                                      This parameter can be a number between 0x00 and 0xFF  */
+
+  uint16_t TIM_Break;            /*!< Specifies whether the TIM Break input is enabled or not.
+                                      This parameter can be a value of @ref Break_Input_enable_disable */
+
+  uint16_t TIM_BreakPolarity;    /*!< Specifies the TIM Break Input pin polarity.
+                                      This parameter can be a value of @ref Break_Polarity */
+
+  uint16_t TIM_AutomaticOutput;  /*!< Specifies whether the TIM Automatic Output feature is enabled or not.
+                                      This parameter can be a value of @ref TIM_AOE_Bit_Set_Reset */
+} TIM_BDTRInitTypeDef;
+
+
+typedef struct
+{
+  __IO uint32_t CCR;
+  __IO uint32_t CNDTR;
+  __IO uint32_t CPAR;
+  __IO uint32_t CMAR;
+} DMA_Channel_TypeDef;
+
+typedef struct
+{
+  __IO uint32_t ISR;
+  __IO uint32_t IFCR;
+} DMA_TypeDef;
+
 
 //rcc config
 #define RCC                 ((RCC_TypeDef *) RCC_BASE)
@@ -480,6 +685,13 @@ typedef struct
 #define NVIC                ((NVIC_TypeDef *) NVIC_BASE)        /*!< NVIC configuration struct            */
 //brief External Interrupt/Event Controller
 #define EXTI                ((EXTI_TypeDef *) EXTI_BASE)
+//TIM config
+#define TIM2                ((TIM_TypeDef *) TIM2_BASE)
+#define TIM3                ((TIM_TypeDef *) TIM3_BASE)
+#define TIM4                ((TIM_TypeDef *) TIM4_BASE)
+#define TIM5                ((TIM_TypeDef *) TIM5_BASE)
+#define TIM6                ((TIM_TypeDef *) TIM6_BASE)
+#define TIM7                ((TIM_TypeDef *) TIM7_BASE)
 //다른 선택을 위해서 사용하는 것
 #define AFIO                ((AFIO_TypeDef *) AFIO_BASE)
 

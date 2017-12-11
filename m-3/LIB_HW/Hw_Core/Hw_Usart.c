@@ -7,6 +7,7 @@ HW_USART_DEF void USART_Init(USART_TypeDef* USARTx, USART_InitTypeDef* USART_Ini
 HW_USART_DEF uint16_t USART_ReceiveData(USART_TypeDef* USARTx);
 HW_USART_DEF void USART_SendData(USART_TypeDef* USARTx, uint16_t Data);
 HW_USART_DEF FlagStatus USART_GetFlagStatus(USART_TypeDef* USARTx, uint16_t USART_FLAG);
+HW_USART_DEF void USART_Start_Cmd(USART_TypeDef* USARTx, FunctionalState NewStatue);
 
 HW_USART_DEF void USART1_Init(void)
 {
@@ -150,4 +151,16 @@ HW_USART_DEF FlagStatus USART_GetFlagStatus(USART_TypeDef* USARTx, uint16_t USAR
     bitstatus = RESET;
   }
   return bitstatus;
+}
+
+HW_USART_DEF void USART_Start_Cmd(USART_TypeDef* USARTx, FunctionalState NewStatue)
+{
+  if(NewStatue != DISABLE)
+  {
+    USARTx->CR1 |= USART_CR1_SET;
+  }
+  else
+  {
+    USARTx->CR1 &= USART_CR1_RESET;
+  }
 }
