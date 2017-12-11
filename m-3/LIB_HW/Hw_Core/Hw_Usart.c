@@ -4,6 +4,9 @@
 
 HW_USART_DEF void USART1_Init(void);
 HW_USART_DEF void USART_Init(USART_TypeDef* USARTx, USART_InitTypeDef* USART_InitStruct);
+HW_USART_DEF uint16_t USART_ReceiveData(USART_TypeDef* USARTx);
+HW_USART_DEF void USART_SendData(USART_TypeDef* USARTx, uint16_t Data);
+HW_USART_DEF FlagStatus USART_GetFlagStatus(USART_TypeDef* USARTx, uint16_t USART_FLAG);
 
 HW_USART_DEF void USART1_Init(void)
 {
@@ -119,4 +122,32 @@ HW_USART_DEF void USART_Init(USART_TypeDef* USARTx, USART_InitTypeDef* USART_Ini
 
   /* Write to USART BRR */
   USARTx->BRR = (uint16_t)tmpreg;
+}
+
+
+HW_USART_DEF void USART_SendData(USART_TypeDef* USARTx, uint16_t Data)
+{
+  /* Transmit Data */
+  USARTx->DR = (Data & (uint16_t)0x01FF);
+}
+
+HW_USART_DEF uint16_t USART_ReceiveData(USART_TypeDef* USARTx)
+{
+  /* Receive Data */
+  return (uint16_t)(USARTx->DR & (uint16_t)0x01FF);
+}
+
+HW_USART_DEF FlagStatus USART_GetFlagStatus(USART_TypeDef* USARTx, uint16_t USART_FLAG)
+{
+  FlagStatus bitstatus = RESET;
+  
+  if ((USARTx->SR & USART_FLAG) != (uint16_t)RESET)
+  {
+    bitstatus = SET;
+  }
+  else
+  {
+    bitstatus = RESET;
+  }
+  return bitstatus;
 }
