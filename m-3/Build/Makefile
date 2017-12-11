@@ -28,6 +28,7 @@ SRC_HW = ../LIB_HW/Hw_Core/$(STARTUP_C)              \
 		 ../LIB_HW/Hw_Core/Hw_NVIC.c                 \
 		 ../LIB_HW/Hw_Core/Hw_EXTI.c                 \
 		 ../LIB_HW/Hw_Core/Hw_SysTick.c              \
+		 ../LIB_HW/Hw_Core/Hw_ADC.c                  \
 		 ../LIB_HW/Hw_Lib/Hw_Led.c                   \
 		 ../LIB_HW/Hw_Lib/Hw_Key.c                   \
 
