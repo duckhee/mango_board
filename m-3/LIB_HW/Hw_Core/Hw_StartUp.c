@@ -2,32 +2,20 @@
 
 typedef void (*const intfunc)(void);
 // Private define ----------------------------------------------------------------------------------------
-#define WEAK __attribute__ ((weak))
+#define WEAK __attribute__((weak))
 
-// //link pointer get LINKERSCRIPT
-// extern unsigned long _ld_stack_address;
-// extern unsigned long _ld_ram_start;
-// extern unsigned long _ld_text_start;
-// extern unsigned long _ld_text_end;
-// extern unsigned long _ld_data_start;
-// extern unsigned long _ld_data_end;
-// extern unsigned long _ld_bss_start;
-// extern unsigned long _ld_bss_end;
-
-//-- init value for the stack pointer. defined in linker script 
-//
 extern unsigned long _estack;
-extern unsigned long _sidata;    /*!< Start address for the initialization 
-                                      values of the .data section.            */
-extern unsigned long _sdata;     /*!< Start address for the .data section     */    
-extern unsigned long _edata;     /*!< End address for the .data section       */    
-extern unsigned long _sbss;      /*!< Start address for the .bss section      */
-extern unsigned long _ebss;      /*!< End address for the .bss section        */      
-extern void 	     _eram;      /*!< End address for ram                     */
-
+extern unsigned long _sidata;
+extern unsigned long _sdata;
+extern unsigned long _edata;
+extern unsigned long _sbss;
+extern unsigned long _ebss;
+extern unsigned long _eram;
 //--------  Private function prototypes ------------------------------------------------------------------
-void Reset_Handler(void) __attribute__((__interrupt__));
+void Reset_Handler(void)__attribute__((__interrupt__));
+
 extern int main();
+
 void Default_Handler(void);
 
 //--------  Next declaration of the default fault handlers.  ---------------------------------------------
@@ -90,31 +78,11 @@ void WEAK EXTI15_10_IRQHandler(void);			// 50
 void WEAK RTCAlarm_IRQHandler(void);			// 51
 void WEAK USBWakeUp_IRQHandler(void);			// 52
 
-// =======================================================================================================
-//
-//	mthomas: If been built with VECT_TAB_RAM this creates two tables:
-//
-//	(1) a minimal table (stack-pointer, reset-vector) used during startup before relocation of the 
-//	    vector table using SCB_VTOR
-//	(2) a full table which is copied to RAM and used after vector relocation (NVIC_SetVectorTable)
-//
-//	If been built without VECT_TAB_RAM the following comment from STM is valid:
-//	The minimal vector table for a Cortex M3. Note that the proper constructs must be placed on this 
-//	to ensure that it ends up at physical address 0x0000.0000.
-//
-// =======================================================================================================
-
-// -------  isr_vactor table are located in Flash  -------------------------------------------------------
-
-
-
 __attribute__((section(".isr_vectorsflash")))
-//__attribute__(()) 붙여서 해야한다.
 
 void (*g_pfnVectors[])(void) = 
 {
-	(intfunc)((unsigned long)&_estack),	
-    // (intfunc)((unsigned long)&_ld_stack_address), //the stack pointer after relocation flass 영역에 위치한 링크 스크립트 가르치는 것이다. data section을 가르치는 것?
+    (intfunc)((unsigned long)&_estack),
     Reset_Handler,						//  2.Reset Handler
 	NMI_Handler,						//  3.NMI Handler
 	HardFault_Handler,					//  4.Hard Fault Handler
@@ -175,34 +143,18 @@ void (*g_pfnVectors[])(void) =
 	RTCAlarm_IRQHandler,				// 42.RTC Alarm through EXTI Line
 	USBWakeUp_IRQHandler,				// 43.USB Wakeup from suspend
 	0,0,0,0,0,0,0,						// 44.,45.,46.,47.,48.,49.
-
-//	(intfunc)0xF108F85F					// @0x108.ThisisforbootinRAMmodeforSTM32F10xMediumDensity devices.
 };
-
-/**
- * @brief  This is the code that gets called when the processor first
- *          starts execution following a reset event. Only the absolutely
- *          necessary set is performed, after which the application
- *          supplied main() routine is called.
- * @param  None
- * @retval : None
-*/
 
 void Reset_Handler(void)
 {
+    unsigned long *pulSrc, *pulDest;
 
+    pulSrc = &_sidata;
 
-	/* Zero fill the bss segment.  This is done with inline assembly since this
-	   will clear the value of pulDest if it is not kept in a register. */
-		unsigned long *pulSrc, *pulDest;	
-	
-		// Copy the data segment initializers from flash to SRAM
-	pulSrc = &_sidata;
-
-	for(pulDest = &_sdata; pulDest < &_edata; )
-	{
-		*(pulDest++) = *(pulSrc++);
-	}
+    for(pulDest = &_sdata; pulDest < &_edata;)
+    {
+        *(pulDest++) = *(pulSrc++);
+    }
 		__asm("  ldr     r0, =_sbss\n"
           "  ldr     r1, =_ebss\n"
           "  mov     r2, #0\n"
@@ -213,14 +165,7 @@ void Reset_Handler(void)
           "    strlt   r2, [r0], #4\n"
           "    blt     zero_loop");
 
-
-    main(); //jump main function
-
-    #if 0
-
-        printf("failed load ..");
-
-    #endif
+          main();
 
 }
 
