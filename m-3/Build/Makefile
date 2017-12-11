@@ -47,6 +47,7 @@ SRC_AP = ../Main/main.c                              \
 
 SRC_MENU =  ../MENU/Menu_Command.c                   \
             ../MENU/Led_Command.c                    \
+			../MENU/Key_Command.c                    \
 
 
 #source file 

@@ -3,6 +3,10 @@
 
 #include "Menu.h"
 
+#include "Led_Command.h"
+#include "Key_Command.h"
+
+
 
 #ifdef MENU_COMMAND_LOCAL
 #define MENU_COMMAND_DEF
