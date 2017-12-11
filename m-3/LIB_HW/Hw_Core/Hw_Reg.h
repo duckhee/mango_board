@@ -323,6 +323,61 @@ typedef struct
   __I  uint32_t CALIB;                        /*!< SysTick Calibration Register        */
 } SysTick_TypeDef;
 
+typedef struct
+{
+  __IO uint32_t SR;
+  __IO uint32_t CR1;
+  __IO uint32_t CR2;
+  __IO uint32_t SMPR1;
+  __IO uint32_t SMPR2;
+  __IO uint32_t JOFR1;
+  __IO uint32_t JOFR2;
+  __IO uint32_t JOFR3;
+  __IO uint32_t JOFR4;
+  __IO uint32_t HTR;
+  __IO uint32_t LTR;
+  __IO uint32_t SQR1;
+  __IO uint32_t SQR2;
+  __IO uint32_t SQR3;
+  __IO uint32_t JSQR;
+  __IO uint32_t JDR1;
+  __IO uint32_t JDR2;
+  __IO uint32_t JDR3;
+  __IO uint32_t JDR4;
+  __IO uint32_t DR;
+} ADC_TypeDef;
+/* ADC typdef config */
+
+/** 
+  * @brief  ADC Init structure definition  
+  */
+
+  typedef struct
+  {
+    uint32_t ADC_Mode;                      /*!< Configures the ADC to operate in independent or
+                                                 dual mode. 
+                                                 This parameter can be a value of @ref ADC_mode */
+  
+    FunctionalState ADC_ScanConvMode;       /*!< Specifies whether the conversion is performed in
+                                                 Scan (multichannels) or Single (one channel) mode.
+                                                 This parameter can be set to ENABLE or DISABLE */
+  
+    FunctionalState ADC_ContinuousConvMode; /*!< Specifies whether the conversion is performed in
+                                                 Continuous or Single mode.
+                                                 This parameter can be set to ENABLE or DISABLE. */
+  
+    uint32_t ADC_ExternalTrigConv;          /*!< Defines the external trigger used to start the analog
+                                                 to digital conversion of regular channels. This parameter
+                                                 can be a value of @ref ADC_external_trigger_sources_for_regular_channels_conversion */
+  
+    uint32_t ADC_DataAlign;                 /*!< Specifies whether the ADC data alignment is left or right.
+                                                 This parameter can be a value of @ref ADC_data_align */
+  
+    uint8_t ADC_NbrOfChannel;               /*!< Specifies the number of ADC channels that will be converted
+                                                 using the sequencer for regular channel group.
+                                                 This parameter must range from 1 to 16. */
+  }ADC_InitTypeDef;
+
 
 typedef enum 
 {
@@ -414,9 +469,10 @@ typedef struct
 #define NVIC                ((NVIC_TypeDef *) NVIC_BASE)        /*!< NVIC configuration struct            */
 //brief External Interrupt/Event Controller
 #define EXTI                ((EXTI_TypeDef *) EXTI_BASE)
-
-
+//다른 선택을 위해서 사용하는 것
 #define AFIO                ((AFIO_TypeDef *) AFIO_BASE)
+
+
 
 
 
