@@ -21,8 +21,6 @@
 #include "Hw_NVIC.h"
 //EXTI header
 #include "Hw_EXTI.h"
-//systick header
-#include "Hw_Systick.h"
 
 
 //util header

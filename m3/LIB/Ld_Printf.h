@@ -3,18 +3,17 @@
 
 #include "Ap.h"
 
- #ifdef LDSTRING_LOCAL
- #define LDSTRING_DEF
+ #ifdef LD_PRINTF_LOCAL
+ #define LD_PRINTF_DEF
  #else
- #define LDSTRING_DEF        extern
+ #define LD_PRINTF_DEF        extern
  #endif
 
  
 
 
 
- LDSTRING_DEF void printf(char *fmt, ...);
- LDSTRING_DEF char check_byte(char *key);
- LDSTRING_DEF char get_byte(void);
+LD_PRINTF_DEF void printf(char *fmt, ...);
+LD_PRINTF_DEF char get_byte(void);
 
 #endif

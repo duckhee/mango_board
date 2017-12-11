@@ -4,7 +4,9 @@
  * @version   V0.1
  * @date      04/15/2013
  *******************************************************************************/
-#include "Ld_Printf.h"
+#define LD_PRINTF_LOCAL
+
+ #include "Ld_Printf.h"
 
 void print_byte(unsigned int c)
 {
@@ -13,7 +15,7 @@ void print_byte(unsigned int c)
     *(volatile unsigned long *) 0x40013804 = c;
 }
 
-LDSTRING_DEF char get_byte(void)
+LD_PRINTF_DEF char get_byte(void)
 {
     while( !((*(volatile unsigned long *) 0x40013800) & 0x20) ) ;
     return (char) *(volatile unsigned long *) 0x40013804;
@@ -113,7 +115,7 @@ int DecToLong(char *s, long *retval){
 //              %d, %x�� ��쿡�� "%08x", "%8x"�� ���� ��Ÿ�� ���̿� �� ������ 0���� ä���� ���� ����.
 // ��ȯ : ����.
 // ���� : ����.
-LDSTRING_DEF void printf(char *fmt, ...)
+LD_PRINTF_DEF void printf(char *fmt, ...)
 {
         int                i;
         va_list args;

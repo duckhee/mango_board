@@ -29,10 +29,10 @@ SRC_HW = ../LIB_HW/Hw_Core/$(STARTUP_C)    \
 		 ../LIB_HW/Hw_Core/Hw.c            \
 		 ../LIB_HW/Hw_Core/Hw_Rcc.c        \
 		 ../LIB_HW/Hw_Core/Hw_Gpio.c       \
-		 ../LIB_HW/Hw_Core/Hw_NVIC.c       \
-		 ../LIB_HW/Hw_Core/Hw_EXTI.c       \
 		 ../LIB_HW/Hw_Core/Hw_Usart.c      \
 		 ../LIB_HW/Hw_Core/Hw_Flash.c      \
+		 ../LIB_HW/Hw_Core/Hw_NVIC.c       \
+		 ../LIB_HW/Hw_Core/Hw_EXTI.c       \
 		 ../LIB_HW/Hw_Core/Hw_ADC.c        \
 		 ../LIB_HW/Hw_Core/Hw_Systick.c    \
 		 ../LIB_HW/Hw_Lib/Hw_Led.c         \
