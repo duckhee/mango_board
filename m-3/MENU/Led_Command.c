@@ -66,37 +66,37 @@ LED_COMMAND_DEF int command_led_main(int argc, char **argv)
         {
             case '1':
                 printf("No.1\n");
-                Led_Red_On();
+                LED_RED_On();
             break;
 
             case '2':
                 printf("No.2\n");
-                Led_Red_Off();
+                LED_RED_Off();
             break;
             
             case '3':
                 printf("No.3\n");
-                Led_Yellow_On();
+                LED_YELLOW_On();
             break;
 
             case '4':
                 printf("No.4\n");
-                Led_Yellow_Off();
+                LED_YELLOW_Off();
             break;
               
             case '5':
                 printf("No.5\n");
-                Led_Blue_On();
+                LED_BLUE_On();
             break;
 
             case '6':
                 printf("No.6\n");
-                Led_Blue_Off();
+                LED_BLUE_Off();
             break;
 
             case '7':
                 printf("No.7\n");
-                Led_Test();
+                LED_TEST();
             break;
 
             case '8':
@@ -106,12 +106,12 @@ LED_COMMAND_DEF int command_led_main(int argc, char **argv)
 
             case '9':
                 printf("No.9\n");
-                Led_All_On();
+                LED_ALL_On();
             break;
 
             case '0':
                 printf("No.0\n");
-                Led_All_Off();
+                LED_ALL_Off();
             break;
 
             case 'a':
