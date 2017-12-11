@@ -56,6 +56,8 @@
 
 HW_USART_DEF void USART1_Init(void);
 HW_USART_DEF void USART_Init(USART_TypeDef* USARTx, USART_InitTypeDef* USART_InitStruct);
-
+HW_USART_DEF uint16_t USART_ReceiveData(USART_TypeDef* USARTx);
+HW_USART_DEF void USART_SendData(USART_TypeDef* USARTx, uint16_t Data);
+HW_USART_DEF FlagStatus USART_GetFlagStatus(USART_TypeDef* USARTx, uint16_t USART_FLAG);
 
 #endif

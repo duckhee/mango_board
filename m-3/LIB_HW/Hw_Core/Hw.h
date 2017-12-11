@@ -17,6 +17,10 @@
 #include "Hw_NVIC.h"
 //EXTI header
 #include "Hw_EXTI.h"
+//systick header
+#include "Hw_SysTick.h"
+//adc header
+#include "Hw_ADC.h"
 //hw lib header
 #include "Hw_Led.h"
 #include "Hw_Key.h"
