@@ -41,7 +41,8 @@ SRC_AP = ../Main/main.c                              \
          
 
 
-SRC_MENU =  
+SRC_MENU =  ../MENU/Menu_Command.c                   \
+
 
 #source file 
 SRC =$(SRC_HW) $(SRC_LB) $(SRC_MENU) $(SRC_AP)
