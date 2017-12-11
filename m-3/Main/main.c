@@ -7,6 +7,6 @@ int main()
     EXTI_Configuration();
     System_Information();
     printf("testing!\n");
-    LED_TEST();
+    command_main();
     
 }
