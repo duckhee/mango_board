@@ -21,6 +21,13 @@
 #define HW_SEG_DEF              extern
 #endif
 
-
+HW_SEG_DEF void POWER_SEG_On(void);
+HW_SEG_DEF void POWER_SEG_Off(void);
+HW_SEG_DEF void SEG_OnePin_On(uint16_t pinNum);
+HW_SEG_DEF void SEG_OnePin_Off(uint16_t pinNum);
+HW_SEG_DEF void SEG_AllPin_On(void);
+HW_SEG_DEF void SEG_AllPin_Off(void);
+HW_SEG_DEF void SEG_Number_On(unsigned int num);
+HW_SEG_DEF void SEG_TEST(void);
 
 #endif
