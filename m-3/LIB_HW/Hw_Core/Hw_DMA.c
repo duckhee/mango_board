@@ -2,47 +2,24 @@
 
 #include "Hw_DMA.h"
 
-__IO uint16_t ADCConvertedValue;
+
 
 HW_DMA_DEF void DMA_Start_Cmd(DMA_Channel_TypeDef* DMAy_Channelx, FunctionalState NewState);
 HW_DMA_DEF void DMA_Init(DMA_Channel_TypeDef* DMAy_Channelx, DMA_InitTypeDef* DMA_InitStruct);
 HW_DMA_DEF void DMA_DeInit(DMA_Channel_TypeDef* DMAy_Channelx);
-HW_DMA_DEF void DMA_Configuration(void);
 
-HW_DMA_DEF void DMA_Configuration(void)
-{
-    DMA_InitTypeDef DMA_InitStructure;
-
-    /* DMA1 channel1 configuration */
-    DMA_DeInit(DMA1_Channel1);
-    DMA_InitStructure.DMA_PeripheralBaseAddr = ADC1_DR_Address;
-    DMA_InitStructure.DMA_MemoryBaseAddr = (uint32_t)&ADCConvertedValue;
-    DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralSRC;
-    DMA_InitStructure.DMA_BufferSize = 1;
-    DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
-    DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Disable;
-    DMA_InitStructure.DMA_PeripheralDataSize = DMA_MemoryDataSize_HalfWord;
-    DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_HalfWord;
-    DMA_InitStructure.DMA_Mode = DMA_Mode_Circular;
-    DMA_InitStructure.DMA_Priority = DMA_Priority_High;
-    DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
-    DMA_Init(DMA1_Channel1, &DMA_InitStructure);
-
-    /* Enable DMA1 Channel1 */
-    DMA_Start_Cmd(DMA1_Channel1, ENABLE);
-}
 
 HW_DMA_DEF void DMA_Start_Cmd(DMA_Channel_TypeDef* DMAy_Channelx, FunctionalState NewState)
 {
     if(NewState != DISABLE)
     {
         /* Enable the selected DMAy Channelx */
-        DMAy_Channelx->CCR |= DMA_CCR1_EN;
+        DMAy_Channelx->CCR |= DMA_CCR_ENABLE_Set;
     }
     else
     {
         /* Disable the selected DMAy Channelx */
-        DMAy_Channelx->CCR &= (uint16_t)(~DMA_CCR1_EN);
+        DMAy_Channelx->CCR &= DMA_CCR_ENABLE_Reset;
     }
 }
 

@@ -75,7 +75,9 @@
 #define DMA2_Channel3_IT_Mask    ((uint32_t)0x00000F00)
 #define DMA2_Channel4_IT_Mask    ((uint32_t)0x0000F000)
 #define DMA2_Channel5_IT_Mask    ((uint32_t)0x000F0000)
-
+/* DMA ENABLE mask */
+#define DMA_CCR_ENABLE_Set          ((uint32_t)0x00000001)
+#define DMA_CCR_ENABLE_Reset        ((uint32_t)0xFFFFFFFE)
 /*******************  Bit definition for DMA_CCR1 register  *******************/
 #define  DMA_CCR1_EN                         ((uint16_t)0x0001)            /*!< Channel enable*/
 #define  DMA_CCR1_TCIE                       ((uint16_t)0x0002)            /*!< Transfer complete interrupt enable */
@@ -110,6 +112,5 @@
 HW_DMA_DEF void DMA_Start_Cmd(DMA_Channel_TypeDef* DMAy_Channelx, FunctionalState NewState);
 HW_DMA_DEF void DMA_Init(DMA_Channel_TypeDef* DMAy_Channelx, DMA_InitTypeDef* DMA_InitStruct);
 HW_DMA_DEF void DMA_DeInit(DMA_Channel_TypeDef* DMAy_Channelx);
-HW_DMA_DEF void DMA_Configuration(void);
 
 #endif

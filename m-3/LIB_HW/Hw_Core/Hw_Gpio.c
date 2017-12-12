@@ -163,4 +163,9 @@ HW_GPIO_DEF void GPIO_Configuratioin(void)
     GPIO_Init(GPIO_7_SEG, &GPIO_InitStructure);
     POWER_SEG_On();
     SEG_AllPin_Off();
+
+    /* Configure PC.04 (ADC Channel14) as analog input -------------------------*/
+    GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_4;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AIN;
+    GPIO_Init(GPIOC, &GPIO_InitStructure);
 }

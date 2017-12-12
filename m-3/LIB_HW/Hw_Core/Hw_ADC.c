@@ -54,7 +54,7 @@ HW_ADC_DEF void ADC_Configuration(void)
 HW_ADC_DEF void ADC_Init(ADC_TypeDef* ADCx, ADC_InitTypeDef* ADC_InitStruct)
 {
     uint32_t tmpreg1 = 0;
-    uint32_t tmpreg2 = 0;
+    uint8_t tmpreg2 = 0;
     
     /*---------------------------- ADCx CR1 Configuration -----------------*/
     /* Get the ADCx CR1 value */
@@ -88,7 +88,7 @@ HW_ADC_DEF void ADC_Init(ADC_TypeDef* ADCx, ADC_InitTypeDef* ADC_InitStruct)
     /* Configure ADCx: regular channel sequence length */
     /* Set L bits according to ADC_NbrOfChannel value */
     tmpreg2 |= (uint8_t)(ADC_InitStruct->ADC_NbrOfChannel - (uint8_t)1);
-    tmpreg1 |= (uint32_t)tmpreg2 << 0;
+    tmpreg1 |= (uint32_t)tmpreg2 << 20;
     /* Write to ADCx SQR1 */
     ADCx->SQR1 = tmpreg1;
 
@@ -105,8 +105,14 @@ HW_ADC_DEF void ADC_RegularChannelConfig(ADC_TypeDef* ADCx, uint8_t ADC_Channel,
         tmpreg1 = ADCx->SMPR1;
         /* Calculate the mask to clear */
         tmpreg2 = ADC_SMPR1_SMP_Set << (3 * (ADC_Channel - 10));
+        /* Clear the old channel sample time */
+        tmpreg1 &= ~tmpreg2;
+        /* Calculate the mask to set */
+        tmpreg2 = (uint32_t)ADC_SampleTime << (3 * (ADC_Channel - 10));
         /* Set the new channel sample time */
         tmpreg1 |= tmpreg2;
+        /* Store the new register value */
+        ADCx->SMPR1 = tmpreg1;
     }
     /* ADC_Channel include in ADC_Channel_[0..9] */
     else

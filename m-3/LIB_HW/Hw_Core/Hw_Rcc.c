@@ -66,7 +66,7 @@ HW_RCC_DEF void HSE_Init(void)
     /* PCLK2 = HCLK */
     RCC->CFGR |= (uint32_t)APB2_PCLK2_NOT_DIVIDED;
     /* PCLK1 = HCLK */
-    //RCC->CFGR |= (uint32_t)APB1_PCLK1_DIVIDED2;
+    RCC->CFGR |= (uint32_t)APB1_PCLK1_DIVIDED2;
     /* ADC = set div 6 */
     RCC->CFGR |= (uint32_t)ADCPRE_PLCK2_DIVIDED6;
     /* PLL configuration : PLLCLK = HSE * 6 = 72MHz */
