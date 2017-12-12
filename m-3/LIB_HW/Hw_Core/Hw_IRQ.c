@@ -9,6 +9,8 @@ HW_IRQ_DEF void EXTI2_IRQHandler(void);
 HW_IRQ_DEF void EXTI3_IRQHandler(void);
 HW_IRQ_DEF void EXTI4_IRQHandler(void);
 HW_IRQ_DEF void TIM2_IRQHandler(void);
+HW_IRQ_DEF void TIM3_IRQHandler(void);
+HW_IRQ_DEF void TIM4_IRQHandler(void);
 
 
 HW_IRQ_DEF void EXTI0_IRQHandler(void)
@@ -54,4 +56,23 @@ HW_IRQ_DEF void TIM2_IRQHandler(void)
 
     LED_TOGGLE_RED();
 
+}
+
+HW_IRQ_DEF void TIM3_IRQHandler(void)
+{
+    /* Clear TIM3 update interrupt */
+    TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
+
+    LED_TOGGLE_YELLOW();
+
+}
+
+HW_IRQ_DEF void TIM4_IRQHandler(void)
+{
+    /* Clear TIM4 update interrupt */
+    TIM_ClearITPendingBit(TIM4, TIM_IT_Update);
+
+    LED_TOGGLE_BLUE();
+
+    
 }
