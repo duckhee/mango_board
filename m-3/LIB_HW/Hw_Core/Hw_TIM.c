@@ -9,15 +9,38 @@ HW_TIM_DEF void TIM_Start_Cmd(TIM_TypeDef* TIMx, FunctionalState NewState);
 HW_TIM_DEF void TIM_Configuration(void);
 HW_TIM_DEF void TIM_PrescalerConfig(TIM_TypeDef* TIMx, uint16_t prescaler, uint16_t TIM_PscReloadMode);
 HW_TIM_DEF void TIM_ClearFlag(TIM_TypeDef* TIMx, uint16_t TIM_FLAG);
+HW_TIM_DEF void TIM_ITConfig(TIM_TypeDef* TIMx, uint16_t TIM_IT, FunctionalState NewState);
 
 
 HW_TIM_DEF void TIM_Configuration(void)
 {
+    TIM_TimeBaseInitTypeDef  TIM_TimeBaseStructure;
 
+    /* TIM2 configuration */
+    TIM_TimeBaseStructure.TIM_Period = 0x4AF;          
+    TIM_TimeBaseStructure.TIM_Prescaler = 0xEA5F;       
+    TIM_TimeBaseStructure.TIM_ClockDivision = TIM_CKD_DIV1;    
+    TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;  
+    TIM_TimeBaseStructure.TIM_RepetitionCounter = 0x0000;
+    TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
+
+    /* TIM2 enable counter */
+    TIM_Start_Cmd(TIM2, ENABLE);
+
+    /* Immediate load of TIM2 Precaler value */
+    TIM_PrescalerConfig(TIM2, 0xEA5F, TIM_PSCReloadMode_Immediate);
+
+    /* Clear TIM2 update pending flag */
+    TIM_ClearFlag(TIM2, TIM_FLAG_Update);
+
+    /* Enable TIM2 Update interrupt */
+    TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
 }
 
 HW_TIM_DEF void TIM2_IRQHandler(void)
 {
+    /* Clear TIM2 update interrupt */
+    TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
 
 }
 
@@ -71,4 +94,18 @@ HW_TIM_DEF void TIM_ClearFlag(TIM_TypeDef* TIMx, uint16_t TIM_FLAG)
 {
     /* Clear the flags */
     TIMx->SR = (uint16_t)~TIM_FLAG;
+}
+
+HW_TIM_DEF void TIM_ITConfig(TIM_TypeDef* TIMx, uint16_t TIM_IT, FunctionalState NewState)
+{
+    if(NewState != DISABLE)
+    {
+        /* Enable the Interrupt sources */
+        TIMx->DIER |= TIM_IT;
+    }
+    else
+    {
+        /* Disable the Interrupt sources */
+        TIMx->DIER &= (uint16_t)~TIM_IT;
+    }
 }
