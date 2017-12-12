@@ -5,11 +5,7 @@
 
 HW_EXTI_DEF ITStatus EXTI_GetITStatus(uint32_t EXTI_Line);
 HW_EXTI_DEF void EXTI_ClearITPendingBit(uint32_t EXTI_Line);
-HW_EXTI_DEF void EXTI0_IRQHandler(void);
-HW_EXTI_DEF void EXTI1_IRQHandler(void);
-HW_EXTI_DEF void EXTI2_IRQHandler(void);
-HW_EXTI_DEF void EXTI3_IRQHandler(void);
-HW_EXTI_DEF void EXTI4_IRQHandler(void);
+
 HW_EXTI_DEF void EXTI_Configuration(void);
 HW_EXTI_DEF void GPIO_EXTILineConfig(uint8_t GPIO_PortSource, uint8_t GPIO_PinSource);
 
@@ -33,41 +29,6 @@ HW_EXTI_DEF ITStatus EXTI_GetITStatus(uint32_t EXTI_Line)
 HW_EXTI_DEF void EXTI_ClearITPendingBit(uint32_t EXTI_Line)
 {
     EXTI->PR = EXTI_Line;
-}
-
-HW_EXTI_DEF void EXTI0_IRQHandler(void)
-{
-    if(EXTI_GetITStatus(GPIO_EXTI_Line_KEY1) != RESET)
-    {
-        EXTI_ClearITPendingBit(GPIO_EXTI_Line_KEY1);
-        printf("LEFT-WKUP Button Press!!\n");
-    }
-
-}
-
-HW_EXTI_DEF void EXTI1_IRQHandler(void)
-{
-    if(EXTI_GetITStatus(GPIO_EXTI_Line_KEY2) != RESET)
-    {
-        EXTI_ClearITPendingBit(GPIO_EXTI_Line_KEY2);
-        printf("RIGHT-WKUP Button Press!!\n");
-    }
-
-}
-
-HW_EXTI_DEF void EXTI2_IRQHandler(void)
-{
-
-}
-
-HW_EXTI_DEF void EXTI3_IRQHandler(void)
-{
-
-}
-
-HW_EXTI_DEF void EXTI4_IRQHandler(void)
-{
-    
 }
 
 HW_EXTI_DEF void GPIO_EXTILineConfig(uint8_t GPIO_PortSource, uint8_t GPIO_PinSource)

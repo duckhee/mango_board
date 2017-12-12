@@ -41,11 +41,6 @@
 
 HW_EXTI_DEF ITStatus EXTI_GetITStatus(uint32_t EXTI_Line);
 HW_EXTI_DEF void EXTI_ClearITPendingBit(uint32_t EXTI_Line);
-HW_EXTI_DEF void EXTI0_IRQHandler(void);
-HW_EXTI_DEF void EXTI1_IRQHandler(void);
-HW_EXTI_DEF void EXTI2_IRQHandler(void);
-HW_EXTI_DEF void EXTI3_IRQHandler(void);
-HW_EXTI_DEF void EXTI4_IRQHandler(void);
 HW_EXTI_DEF void EXTI_Configuration(void);
 HW_EXTI_DEF void EXTI_Init(EXTI_InitTypeDef* EXTI_InitStruct);
 HW_EXTI_DEF void GPIO_EXTILineConfig(uint8_t GPIO_PortSource, uint8_t GPIO_PinSource);

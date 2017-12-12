@@ -19,6 +19,8 @@
 #include "Hw_EXTI.h"
 //systick header
 #include "Hw_SysTick.h"
+//irq header
+#include "Hw_IRQ.h"
 //tim header
 #include "Hw_TIM.h"
 //dma header
