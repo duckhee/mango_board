@@ -6,6 +6,8 @@
 HW_GPIO_DEF uint8_t GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
 HW_GPIO_DEF void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct);
 HW_GPIO_DEF void GPIO_Configuratioin(void);
+HW_GPIO_DEF void GPIO_WriteBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BitAction BitVal);
+HW_GPIO_DEF uint8_t GPIO_ReadOutputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
 
 HW_GPIO_DEF void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef* GPIO_InitStruct)
 {
@@ -99,6 +101,33 @@ HW_GPIO_DEF uint8_t GPIO_ReadInputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin
         bitStatus = (uint8_t)Bit_RESET;
     }
     return bitStatus;
+}
+
+HW_GPIO_DEF uint8_t GPIO_ReadOutputDataBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+{
+    uint8_t bitstatus = 0x00;
+
+    if((GPIOx->ODR & GPIO_Pin) != (uint32_t)Bit_RESET)
+    {
+        bitstatus = (uint8_t)Bit_SET;
+    }
+    else
+    {
+        bitstatus = (uint8_t)Bit_RESET;
+    }
+    return bitstatus;
+}
+
+HW_GPIO_DEF void GPIO_WriteBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BitAction BitVal)
+{
+    if(BitVal != Bit_RESET)
+    {
+        GPIOx->BSRR = GPIO_Pin;
+    }
+    else
+    {
+        GPIOx->BRR = GPIO_Pin;
+    }
 }
 
 HW_GPIO_DEF void GPIO_Configuratioin(void)

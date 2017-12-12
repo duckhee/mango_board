@@ -23,6 +23,9 @@ HW_LED_DEF void LED_BLUE_On(void);
 HW_LED_DEF void LED_BLUE_Off(void);
 HW_LED_DEF void LED_ALL_On(void);
 HW_LED_DEF void LED_ALL_Off(void);
+HW_LED_DEF void LED_TOGGLE_RED(void);
+HW_LED_DEF void LED_TOGGLE_YELLOW(void);
+HW_LED_DEF void LED_TOGGLE_BLUE(void);
 HW_LED_DEF void LED_MULT_OnOff(uint32_t count);
 HW_LED_DEF void LED_TEST(void);
 

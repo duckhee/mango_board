@@ -13,6 +13,7 @@ HW_DEF void Hw_Init(void)
     APB2Enable(IOPORT_B_ENABLE, ENABLE);
     APB2Enable(IOPORT_C_ENABLE, ENABLE);
     APB2Enable(USART1_ENABLE, ENABLE);
+    APB1Enable(TIM2_ENABLE, ENABLE);
     GPIO_Configuratioin();
     USART1_Init();
     

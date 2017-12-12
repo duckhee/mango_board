@@ -42,6 +42,8 @@ HW_TIM_DEF void TIM2_IRQHandler(void)
     /* Clear TIM2 update interrupt */
     TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
 
+    LED_TOGGLE_RED();
+
 }
 
 HW_TIM_DEF void TIM_ClearITPendingBit(TIM_TypeDef* TIMx, uint16_t TIM_IT)
