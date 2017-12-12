@@ -435,6 +435,63 @@ typedef struct
   }ADC_InitTypeDef;
 
 
+typedef struct
+{
+  uint32_t DMA_PeripheralBaseAddr; /*!< Specifies the peripheral base address for DMAy Channelx. */
+
+  uint32_t DMA_MemoryBaseAddr;     /*!< Specifies the memory base address for DMAy Channelx. */
+
+  uint32_t DMA_DIR;                /*!< Specifies if the peripheral is the source or destination.
+                                        This parameter can be a value of @ref DMA_data_transfer_direction */
+
+  uint32_t DMA_BufferSize;         /*!< Specifies the buffer size, in data unit, of the specified Channel. 
+                                        The data unit is equal to the configuration set in DMA_PeripheralDataSize
+                                        or DMA_MemoryDataSize members depending in the transfer direction. */
+
+  uint32_t DMA_PeripheralInc;      /*!< Specifies whether the Peripheral address register is incremented or not.
+                                        This parameter can be a value of @ref DMA_peripheral_incremented_mode */
+
+  uint32_t DMA_MemoryInc;          /*!< Specifies whether the memory address register is incremented or not.
+                                        This parameter can be a value of @ref DMA_memory_incremented_mode */
+
+  uint32_t DMA_PeripheralDataSize; /*!< Specifies the Peripheral data width.
+                                        This parameter can be a value of @ref DMA_peripheral_data_size */
+
+  uint32_t DMA_MemoryDataSize;     /*!< Specifies the Memory data width.
+                                        This parameter can be a value of @ref DMA_memory_data_size */
+
+  uint32_t DMA_Mode;               /*!< Specifies the operation mode of the DMAy Channelx.
+                                        This parameter can be a value of @ref DMA_circular_normal_mode.
+                                        @note: The circular buffer mode cannot be used if the memory-to-memory
+                                              data transfer is configured on the selected Channel */
+
+  uint32_t DMA_Priority;           /*!< Specifies the software priority for the DMAy Channelx.
+                                        This parameter can be a value of @ref DMA_priority_level */
+
+  uint32_t DMA_M2M;                /*!< Specifies if the DMAy Channelx will be used in memory-to-memory transfer.
+                                        This parameter can be a value of @ref DMA_memory_to_memory */
+}DMA_InitTypeDef;
+//DMA init config
+
+/**
+  * @brief DMA Controller
+  */
+
+typedef struct
+{
+  __IO uint32_t CCR;
+  __IO uint32_t CNDTR;
+  __IO uint32_t CPAR;
+  __IO uint32_t CMAR;
+} DMA_Channel_TypeDef;
+
+typedef struct
+{
+  __IO uint32_t ISR;
+  __IO uint32_t IFCR;
+} DMA_TypeDef;
+
+
 typedef enum 
 {
 /******  Cortex-M3 Processor Exceptions Numbers ***************************************************/
@@ -644,20 +701,6 @@ typedef struct
 } TIM_BDTRInitTypeDef;
 
 
-typedef struct
-{
-  __IO uint32_t CCR;
-  __IO uint32_t CNDTR;
-  __IO uint32_t CPAR;
-  __IO uint32_t CMAR;
-} DMA_Channel_TypeDef;
-
-typedef struct
-{
-  __IO uint32_t ISR;
-  __IO uint32_t IFCR;
-} DMA_TypeDef;
-
 
 //rcc config
 #define RCC                 ((RCC_TypeDef *) RCC_BASE)
@@ -695,7 +738,22 @@ typedef struct
 #define TIM7                ((TIM_TypeDef *) TIM7_BASE)
 //다른 선택을 위해서 사용하는 것
 #define AFIO                ((AFIO_TypeDef *) AFIO_BASE)
-
+//dma config
+#define DMA1                ((DMA_TypeDef *) DMA1_BASE)
+#define DMA2                ((DMA_TypeDef *) DMA2_BASE)
+//dma channel define
+#define DMA1_Channel1       ((DMA_Channel_TypeDef *) DMA1_Channel1_BASE)
+#define DMA1_Channel2       ((DMA_Channel_TypeDef *) DMA1_Channel2_BASE)
+#define DMA1_Channel3       ((DMA_Channel_TypeDef *) DMA1_Channel3_BASE)
+#define DMA1_Channel4       ((DMA_Channel_TypeDef *) DMA1_Channel4_BASE)
+#define DMA1_Channel5       ((DMA_Channel_TypeDef *) DMA1_Channel5_BASE)
+#define DMA1_Channel6       ((DMA_Channel_TypeDef *) DMA1_Channel6_BASE)
+#define DMA1_Channel7       ((DMA_Channel_TypeDef *) DMA1_Channel7_BASE)
+#define DMA2_Channel1       ((DMA_Channel_TypeDef *) DMA2_Channel1_BASE)
+#define DMA2_Channel2       ((DMA_Channel_TypeDef *) DMA2_Channel2_BASE)
+#define DMA2_Channel3       ((DMA_Channel_TypeDef *) DMA2_Channel3_BASE)
+#define DMA2_Channel4       ((DMA_Channel_TypeDef *) DMA2_Channel4_BASE)
+#define DMA2_Channel5       ((DMA_Channel_TypeDef *) DMA2_Channel5_BASE)
 
 
 

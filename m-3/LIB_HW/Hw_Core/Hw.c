@@ -16,6 +16,8 @@ HW_DEF void Hw_Init(void)
     APB1Enable(TIM2_ENABLE, ENABLE);
     APB1Enable(TIM3_ENABLE, ENABLE);
     APB1Enable(TIM4_ENABLE, ENABLE);
+    APBEnable(DMA1_ENABLE, ENABLE);
+    APB2Enable(ADC1_ENABLE, ENABLE);
     GPIO_Configuratioin();
     USART1_Init();
     
