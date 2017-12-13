@@ -63,7 +63,7 @@ void ADC_Configuration(void)
 RCC_ClocksTypeDef  rcc_clocks;
 int AD_value;
 int timeout = 7200000;
-
+float test_value;
 int main()
 {
     float volt = 0.0;
@@ -82,7 +82,8 @@ int main()
         volt = (float) ADCConvertedValue * 3.3 / (float) 4095;
         
         printf("ADCConvertedValue: %d\n", ADCConvertedValue);
-        
+        printf("volt :%f V\n", volt);
+        AD_value = ADC_GetConversionValue(ADC1);
         
     }
 }
