@@ -5,6 +5,7 @@
 
 #include "Led_Command.h"
 #include "Key_Command.h"
+#include "Seg_Command.h"
 
 
 
