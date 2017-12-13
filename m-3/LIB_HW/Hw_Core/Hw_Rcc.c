@@ -79,6 +79,7 @@ HW_RCC_DEF void HSE_Init(void)
         ;
     }
     /* select PLL as system clock source */
+    RCC->CFGR &= (uint32_t)((uint32_t)~(RCC_CFGR_SW));
     RCC->CFGR |= (uint32_t)SW_PLL_SYSCLOCK;
     /* Wailt til PLL is used as system clock source */
     while((RCC->CFGR & (uint32_t)RCC_SWS_MASK) != ((uint32_t)0x08))

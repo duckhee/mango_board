@@ -29,6 +29,15 @@
 #define DMA_PeripheralInc_Enable           ((uint32_t)0x00000040)
 #define DMA_PeripheralInc_Disable          ((uint32_t)0x00000000)
 
+
+/** @defgroup DMA_peripheral_data_size 
+  * @{
+  */
+
+#define DMA_PeripheralDataSize_Byte        ((uint32_t)0x00000000)
+#define DMA_PeripheralDataSize_HalfWord    ((uint32_t)0x00000100)
+#define DMA_PeripheralDataSize_Word        ((uint32_t)0x00000200)
+
 /** @defgroup DMA_priority_level 
   * @{
   */

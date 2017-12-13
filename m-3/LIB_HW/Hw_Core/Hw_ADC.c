@@ -12,44 +12,9 @@ HW_ADC_DEF FlagStatus ADC_GetResetCalibrationStatus(ADC_TypeDef* ADCx);
 HW_ADC_DEF void ADC_StartCalibration(ADC_TypeDef* ADCx);
 HW_ADC_DEF FlagStatus ADC_GetCalibrationStatus(ADC_TypeDef* ADCx);
 HW_ADC_DEF void ADC_SoftwareStartConvCmd(ADC_TypeDef* ADCx, FunctionalState NewState);
-HW_ADC_DEF void ADC_Configuration(void);
 HW_ADC_DEF FlagStatus ADC_GetFlagStatus(ADC_TypeDef* ADCx, uint8_t ADC_FLAG);
 HW_ADC_DEF uint16_t ADC_GetConversionValue(ADC_TypeDef* ADCx);
 
-HW_ADC_DEF void ADC_Configuration(void)
-{
-    ADC_InitTypeDef ADC_InitStructure;
-    /* ADC1 Configuration */
-    ADC_InitStructure.ADC_Mode = ADC_Mode_Independent;
-    ADC_InitStructure.ADC_ScanConvMode = DISABLE;
-    ADC_InitStructure.ADC_ContinuousConvMode = ENABLE;
-    ADC_InitStructure.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
-    ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
-    ADC_InitStructure.ADC_NbrOfChannel = 1;
-    ADC_Init(ADC1, &ADC_InitStructure);
-    
-    /* ADC1 regular channel14 configuration */ 
-    ADC_RegularChannelConfig(ADC1, ADC_Channel_14, 1, ADC_SampleTime_55Cycles5);
-
-    /* Enable ADC1 DMA */
-    ADC_DMA_Enable_Cmd(ADC1, ENABLE);
-
-    /* Enable ADC1 */
-    ADC_Enable_Cmd(ADC1, ENABLE);
-
-    /* Enable ADC1 reset calibaration register */   
-    ADC_ResetCalibration(ADC1);
-    /* Check the end of ADC1 reset calibration register */
-    while(ADC_GetResetCalibrationStatus(ADC1));
-
-    /* Start ADC1 calibaration */
-    ADC_StartCalibration(ADC1);
-    /* Check the end of ADC1 calibration */
-    while(ADC_GetCalibrationStatus(ADC1));
-
-    /* Start ADC1 Software Conversion */ 
-    ADC_SoftwareStartConvCmd(ADC1, ENABLE);
-}
 
 
 HW_ADC_DEF void ADC_Init(ADC_TypeDef* ADCx, ADC_InitTypeDef* ADC_InitStruct)
@@ -77,8 +42,8 @@ HW_ADC_DEF void ADC_Init(ADC_TypeDef* ADCx, ADC_InitTypeDef* ADC_InitStruct)
     /* Set ALIGN bit according to ADC_DataAlign value */
     /* Set EXTSEL bits according to ADC_ExternalTrigConv value */
     /* Set CONT bit according to ADC_ContinuousConvMode value */
-    tmpreg1 = (uint32_t)(ADC_InitStruct->ADC_DataAlign | ADC_InitStruct->ADC_ExternalTrigConv | 
-    ((uint32_t)ADC_InitStruct->ADC_ContinuousConvMode << 1));
+    tmpreg1 |= (uint32_t)(ADC_InitStruct->ADC_DataAlign | ADC_InitStruct->ADC_ExternalTrigConv |
+            ((uint32_t)ADC_InitStruct->ADC_ContinuousConvMode << 1));
     /* Write to ADCx CR2 */
     ADCx->CR2 = tmpreg1;
     /*---------------------------- ADCx SQR1 Configuration -----------------*/

@@ -7,6 +7,8 @@
 #define RCC_HSI_Value                        ((uint32_t)8000000) /*!< Value of the Internal oscillator in Hz*/
 #define RCC_HSE_Value                        ((uint32_t)12000000)
 
+
+
 /********************  Bit definition for RCC_CR register  ********************/
 #define  RCC_CR_HSION                        ((uint32_t)0x00000001)        /*!< Internal High Speed clock enable */
 #define  RCC_CR_HSIRDY                       ((uint32_t)0x00000002)        /*!< Internal High Speed clock ready flag */
@@ -18,6 +20,13 @@
 #define  RCC_CR_CSSON                        ((uint32_t)0x00080000)        /*!< Clock Security System enable */
 #define  RCC_CR_PLLON                        ((uint32_t)0x01000000)        /*!< PLL enable */
 #define  RCC_CR_PLLRDY                       ((uint32_t)0x02000000)        /*!< PLL clock ready flag */
+
+
+/*******************  Bit definition for RCC_CFGR register  *******************/
+/*!< SW configuration */
+#define  RCC_CFGR_SW                         ((uint32_t)0x00000003)        /*!< SW[1:0] bits (System clock Switch) */
+#define  RCC_CFGR_SW_0                       ((uint32_t)0x00000001)        /*!< Bit 0 */
+#define  RCC_CFGR_SW_1                       ((uint32_t)0x00000002)        /*!< Bit 1 */
 
 //System clock switch
 #define SW_HSI_SYSCLOCK                      ((uint32_t)0x00000000)
