@@ -13,7 +13,8 @@ HW_ADC_DEF void ADC_StartCalibration(ADC_TypeDef* ADCx);
 HW_ADC_DEF FlagStatus ADC_GetCalibrationStatus(ADC_TypeDef* ADCx);
 HW_ADC_DEF void ADC_SoftwareStartConvCmd(ADC_TypeDef* ADCx, FunctionalState NewState);
 HW_ADC_DEF void ADC_Configuration(void);
-
+HW_ADC_DEF FlagStatus ADC_GetFlagStatus(ADC_TypeDef* ADCx, uint8_t ADC_FLAG);
+HW_ADC_DEF uint16_t ADC_GetConversionValue(ADC_TypeDef* ADCx);
 
 HW_ADC_DEF void ADC_Configuration(void)
 {
@@ -267,4 +268,23 @@ HW_ADC_DEF void ADC_SoftwareStartConvCmd(ADC_TypeDef* ADCx, FunctionalState NewS
        ADC conversion */
        ADCx->CR2 &= ADC_CR2_EXTTRIG_SWSTART_Reset;
     }
+}
+
+HW_ADC_DEF FlagStatus ADC_GetFlagStatus(ADC_TypeDef* ADCx, uint8_t ADC_FLAG)
+{
+    FlagStatus bitstatus = RESET;
+    if((ADCx->SR & ADC_FLAG) != (uint8_t)RESET)
+    {
+        bitstatus = SET;
+    }
+    else
+    {
+        bitstatus = RESET;
+    }
+    return bitstatus;
+}
+
+HW_ADC_DEF uint16_t ADC_GetConversionValue(ADC_TypeDef* ADCx)
+{
+    return (uint16_t)ADCx->DR;
 }

@@ -143,7 +143,7 @@ HW_ADC_DEF void ADC_StartCalibration(ADC_TypeDef* ADCx);
 HW_ADC_DEF FlagStatus ADC_GetCalibrationStatus(ADC_TypeDef* ADCx);
 HW_ADC_DEF void ADC_SoftwareStartConvCmd(ADC_TypeDef* ADCx, FunctionalState NewState);
 HW_ADC_DEF void ADC_Configuration(void);
-
-
+HW_ADC_DEF FlagStatus ADC_GetFlagStatus(ADC_TypeDef* ADCx, uint8_t ADC_FLAG);
+HW_ADC_DEF uint16_t ADC_GetConversionValue(ADC_TypeDef* ADCx);
 
 #endif
