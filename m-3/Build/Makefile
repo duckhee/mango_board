@@ -68,7 +68,7 @@ OBJNM = $(PREFIX)nm
 SIZE = $(PREFIX)size
 REMOVE = $(REMOVE_CMD) -rf
 
-
+#cpu type 설정 및 thumb 모드 설정 arch 설정 하는 플레이그
 CFLAGS  = -gdwarf-2 -O2 -mcpu=cortex-m3 -mthumb-interwork -DSTM32F10X_MD 
 #CFLAGS += $(INCLUDE) -mlong-calls -ffunction-sections -fdata-sections -fpromote-loop-indices -Wall -Wextra -Wimplicit -Wcast-align -Wpointer-arith -Wredundant-decls 
 CFLAGS += $(INCLUDE) -mlong-calls -ffunction-sections -fdata-sections -Wall -Wextra -Wimplicit -Wcast-align -Wpointer-arith -Wredundant-decls
@@ -77,7 +77,7 @@ CFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
 #무엇인지 확인
 CONLYFLAGS += -Wnested-externs 
 CONLYFLAGS += -std=gnu99
-#이게 맞는지?
+#이게 맞는지? 정적 파일과 lib 사용과 startfile 사용을 하지 않는다고 선언 하는 것 
 LDFLAGS = -static -nostdlib -nostartfiles -Wl,-Map=$(TARGET).map,--cref,--gc-sections -L./ -lc  -lm  -lc -lgcc -T.//STM32F10x_flash.ld
 #ELF32_LDFLAGS = -Wl,-T,stm32f10x.ld
 
@@ -212,4 +212,5 @@ clean_list :
 # Listing of phony targets.
 .PHONY : all finish \
 build elf hex bin lss sym clean clean_list createdirs sizeinfo
+
 
