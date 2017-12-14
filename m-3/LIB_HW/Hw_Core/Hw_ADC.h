@@ -1,8 +1,10 @@
+/* 현재 ADC는 정수형만 가능하다 float형 가능하게 makefile 수정 필요 ? */
+
+
 #ifndef __HW_ADC_H__
 #define __HW_ADC_H__
 
 #include "Hw.h"
-
 
 /** @defgroup ADC_data_align 
   * @{
