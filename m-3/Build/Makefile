@@ -80,11 +80,11 @@ REMOVE = $(REMOVE_CMD) -rf
 #cpu type 설정 및 thumb 모드 설정 arch 설정 하는 플레이그
 CFLAGS  = -gdwarf-2 -O2 -mcpu=cortex-m3 -mthumb-interwork -DSTM32F10X_MD 
 #float add ??? 
-#CFLAGS  = -march=armv7-m -mthumb -mthumb-interwork -gdwarf-2 -O2
+#CFLAGS  = -march=armv7-m -mthumb-interwork -gdwarf-2 -O2 -mfloat-abi=soft -msoft-float
 #CPU_SPEC  += -mfloat-abi=soft
 #CPU_SPEC  += -mfloat-abi=hard -mfpu=fpv4-sp-d16
 
-#CFLAGS += $(INCLUDE) -mlong-calls -ffunction-sections -fdata-sections -fpromote-loop-indices -Wall -Wextra -Wimplicit -Wcast-align -Wpointer-arith -Wredundant-decls 
+#CFLAGS += $(INCLUDE) -mlong-calls -ffunction-sections -fdata-sections -fpromote-loop-indices -Wall -Wextra -Wimplicit -Wcast-align -Wpointer-arith -Wredundant-decls -msoft-float
 CFLAGS += $(INCLUDE) -mlong-calls -ffunction-sections -fdata-sections -Wall -Wextra -Wimplicit -Wcast-align -Wpointer-arith -Wredundant-decls 
 CFLAGS += -Wshadow -Wcast-qual -Wcast-align -Wa,-adhlns=start_stm32f10x.lst -MD -MP -MF $(TARGET).elf.d
 #header file add 경로는 자동으로 해서 참조
