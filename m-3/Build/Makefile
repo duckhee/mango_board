@@ -79,10 +79,48 @@ REMOVE = $(REMOVE_CMD) -rf
 # Flags for C and C++ (arm-elf-gcc/arm-elf-g++)
 #cpu type 설정 및 thumb 모드 설정 arch 설정 하는 플레이그
 CFLAGS  = -gdwarf-2 -O2 -mcpu=cortex-m3 -mthumb-interwork -DSTM32F10X_MD 
+
+# -mfloat-abi=name
+#    Specifies which floating-point ABI to use.
+#    "soft": Causes GCC to generate output containing library calls for
+#            floating-point operations. Same as -msoft-float.
+#    "softfp": Allows the generation of code using hardware floating-point
+#            instructions, but still uses the soft-float calling conventions.
+#    "hard": Allows generation of floating-point instructions and uses
+#            FPU-specific calling conventions. Same as -mhard-float
+#    Note that the hard-float and soft-float ABIs are not link-compatible;
+#    you must compile your entire program with the same ABI, and link with a
+#    compatible set of libraries.
+#
+# -msoft-float, -mhard-float: Use -mfloat-abi=name instead.
+#
+# -mfpu=fpv4-sp-d16
+#    Specify which FPU is available. I think, this is clear from the
+#    -mcpu= but OTOH, we explicitly link to fpv4-sp-d16 libraries, so let's
+#    keep it in there to be sure.
+#
+# -fsingle-precision-constant
+#    Ensure that 1.0 is treated as 1.0f. Avoids that intermediate DOUBLE
+#    floats are generated. Writing the 'f' suffix is better but error-prone.
+#
+# -mfix-cortex-m3-ldrd
+#    Is automatically enabled for Cortex-M3.
+#
+# -fno-common : unclear if needed
+#
+# -lm -lc
+#    Required during linking for sqrtf() etc.
+#
+
+#Need to put this pack in CFLAGS????
+#-D"assert_param(x)="
 #float add ??? 
 #CFLAGS  = -march=armv7-m -mthumb-interwork -gdwarf-2 -O2 -mfloat-abi=soft -msoft-float
 #CPU_SPEC  += -mfloat-abi=soft
-#CPU_SPEC  += -mfloat-abi=hard -mfpu=fpv4-sp-d16
+# Hardware float support
+#CPU_SPEC  += -mfloat-abi=hard -mfpu=fpv4-sp-d16  -ffast-math
+#CFLAGS += -fsingle-precision-constant -Wdouble-promotion
+#CFLAGS += -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 
 #CFLAGS += $(INCLUDE) -mlong-calls -ffunction-sections -fdata-sections -fpromote-loop-indices -Wall -Wextra -Wimplicit -Wcast-align -Wpointer-arith -Wredundant-decls -msoft-float
 CFLAGS += $(INCLUDE) -mlong-calls -ffunction-sections -fdata-sections -Wall -Wextra -Wimplicit -Wcast-align -Wpointer-arith -Wredundant-decls 
