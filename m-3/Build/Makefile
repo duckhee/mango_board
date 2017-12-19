@@ -68,16 +68,42 @@ OBJNM = $(PREFIX)nm
 SIZE = $(PREFIX)size
 REMOVE = $(REMOVE_CMD) -rf
 
+# Compiler flags.
+#  -g*:          generate debugging information
+#  -O*:          optimization level
+#  -f...:        tuning, see GCC manual and avr-libc documentation
+#  -Wall...:     warning level
+#  -Wa,...:      tell GCC to pass this to the assembler.
+#    -adhlns...: create assembler listing
+#
+# Flags for C and C++ (arm-elf-gcc/arm-elf-g++)
 #cpu type 설정 및 thumb 모드 설정 arch 설정 하는 플레이그
 CFLAGS  = -gdwarf-2 -O2 -mcpu=cortex-m3 -mthumb-interwork -DSTM32F10X_MD 
+#float add ??? 
+#CFLAGS  = -march=armv7-m -mthumb -mthumb-interwork -gdwarf-2 -O2
+#CPU_SPEC  += -mfloat-abi=soft
+#CPU_SPEC  += -mfloat-abi=hard -mfpu=fpv4-sp-d16
+
 #CFLAGS += $(INCLUDE) -mlong-calls -ffunction-sections -fdata-sections -fpromote-loop-indices -Wall -Wextra -Wimplicit -Wcast-align -Wpointer-arith -Wredundant-decls 
-CFLAGS += $(INCLUDE) -mlong-calls -ffunction-sections -fdata-sections -Wall -Wextra -Wimplicit -Wcast-align -Wpointer-arith -Wredundant-decls
+CFLAGS += $(INCLUDE) -mlong-calls -ffunction-sections -fdata-sections -Wall -Wextra -Wimplicit -Wcast-align -Wpointer-arith -Wredundant-decls 
 CFLAGS += -Wshadow -Wcast-qual -Wcast-align -Wa,-adhlns=start_stm32f10x.lst -MD -MP -MF $(TARGET).elf.d
+#header file add 경로는 자동으로 해서 참조
 CFLAGS += $(patsubst %,-I%,$(EXTRAINCDIRS))
 #무엇인지 확인
+# flags only for C
 CONLYFLAGS += -Wnested-externs 
+# Compiler flag to set the C Standard level.
+# c89   - "ANSI" C
+# gnu89 - c89 plus GCC extensions
+# c99   - ISO C99 standard (not yet fully implemented)
+# gnu99 - c99 plus GCC extensions
 CONLYFLAGS += -std=gnu99
-#이게 맞는지? 정적 파일과 lib 사용과 startfile 사용을 하지 않는다고 선언 하는 것 
+# Linker flags.
+#  -Wl,...:     tell GCC to pass this to linker.
+#    -Map:      create map file
+#    --cref:    add cross reference to  map file
+#LDFLAGS = -Map=$(TARGET).map --cref
+#이게 맞는지? 정적 파일과 lib 사용과 startfile 사용을 하지 않는다고 선언 하는 것 -nostdlib 라이브러리 사용 하지 않는다는 flag
 LDFLAGS = -static -nostdlib -nostartfiles -Wl,-Map=$(TARGET).map,--cref,--gc-sections -L./ -lc  -lm  -lc -lgcc -T.//STM32F10x_flash.ld
 #ELF32_LDFLAGS = -Wl,-T,stm32f10x.ld
 

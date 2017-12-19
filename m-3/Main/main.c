@@ -76,12 +76,14 @@ int main()
     DMA_Configuration();
     ADC_Configuration();
     printf("testing!\n");
+    float test = 3.14;
     while (1)
     {
         Delay(1000);
         volt = (float) ADCConvertedValue * 3.3 / (float) 4095;
         
         printf("ADCConvertedValue: %d\n", ADCConvertedValue);
+        printf("%f\n", test);
         printf("volt :%f V\n", volt);
         AD_value = ADC_GetConversionValue(ADC1);
         
