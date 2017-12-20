@@ -143,6 +143,9 @@ CONLYFLAGS += -std=gnu99
 #LDFLAGS = -Map=$(TARGET).map --cref
 #이게 맞는지? 정적 파일과 lib 사용과 startfile 사용을 하지 않는다고 선언 하는 것 -nostdlib 라이브러리 사용 하지 않는다는 flag
 LDFLAGS = -static -nostdlib -nostartfiles -Wl,-Map=$(TARGET).map,--cref,--gc-sections -L./ -lc  -lm  -lc -lgcc -T.//STM32F10x_flash.ld
+#LDFLAGS = -static -nostdlib -nostartfiles -u _printf_float --specs=nano.specs -lc -lnosys -Wl,-Map=$(TARGET).map,--cref,--gc-sections -L./ -lc  -lm  -lc -lgcc -T.//STM32F10x_flash.ld
+#LDFLAGS += --specs=nano.specs -lc -lnosys
+#LDFLAGS += -u _printf_float
 #ELF32_LDFLAGS = -Wl,-T,stm32f10x.ld
 
 ELFSIZE = $(SIZE) -A $(TARGET).elf

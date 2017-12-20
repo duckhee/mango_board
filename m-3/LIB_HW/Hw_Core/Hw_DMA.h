@@ -70,23 +70,23 @@
 #define DMA_M2M_Disable                    ((uint32_t)0x00000000)
 
 /* DMA1 Channelx interrupt pending bit masks */
-#define DMA1_Channel1_IT_Mask    ((uint32_t)0x0000000F)
-#define DMA1_Channel2_IT_Mask    ((uint32_t)0x000000F0)
-#define DMA1_Channel3_IT_Mask    ((uint32_t)0x00000F00)
-#define DMA1_Channel4_IT_Mask    ((uint32_t)0x0000F000)
-#define DMA1_Channel5_IT_Mask    ((uint32_t)0x000F0000)
-#define DMA1_Channel6_IT_Mask    ((uint32_t)0x00F00000)
-#define DMA1_Channel7_IT_Mask    ((uint32_t)0x0F000000)
+#define DMA1_Channel1_IT_Mask              ((uint32_t)0x0000000F)
+#define DMA1_Channel2_IT_Mask              ((uint32_t)0x000000F0)
+#define DMA1_Channel3_IT_Mask              ((uint32_t)0x00000F00)
+#define DMA1_Channel4_IT_Mask              ((uint32_t)0x0000F000)
+#define DMA1_Channel5_IT_Mask              ((uint32_t)0x000F0000)
+#define DMA1_Channel6_IT_Mask              ((uint32_t)0x00F00000)
+#define DMA1_Channel7_IT_Mask              ((uint32_t)0x0F000000)
 
 /* DMA2 Channelx interrupt pending bit masks */
-#define DMA2_Channel1_IT_Mask    ((uint32_t)0x0000000F)
-#define DMA2_Channel2_IT_Mask    ((uint32_t)0x000000F0)
-#define DMA2_Channel3_IT_Mask    ((uint32_t)0x00000F00)
-#define DMA2_Channel4_IT_Mask    ((uint32_t)0x0000F000)
-#define DMA2_Channel5_IT_Mask    ((uint32_t)0x000F0000)
+#define DMA2_Channel1_IT_Mask             ((uint32_t)0x0000000F)
+#define DMA2_Channel2_IT_Mask             ((uint32_t)0x000000F0)
+#define DMA2_Channel3_IT_Mask             ((uint32_t)0x00000F00)
+#define DMA2_Channel4_IT_Mask             ((uint32_t)0x0000F000)
+#define DMA2_Channel5_IT_Mask             ((uint32_t)0x000F0000)
 /* DMA ENABLE mask */
-#define DMA_CCR_ENABLE_Set          ((uint32_t)0x00000001)
-#define DMA_CCR_ENABLE_Reset        ((uint32_t)0xFFFFFFFE)
+#define DMA_CCR_ENABLE_Set                ((uint32_t)0x00000001)
+#define DMA_CCR_ENABLE_Reset              ((uint32_t)0xFFFFFFFE)
 /*******************  Bit definition for DMA_CCR1 register  *******************/
 #define  DMA_CCR1_EN                         ((uint16_t)0x0001)            /*!< Channel enable*/
 #define  DMA_CCR1_TCIE                       ((uint16_t)0x0002)            /*!< Transfer complete interrupt enable */
@@ -98,15 +98,15 @@
 #define  DMA_CCR1_MINC                       ((uint16_t)0x0080)            /*!< Memory increment mode */
 
 /* DMA ENABLE mask */
-#define DMA_CCR_ENABLE_Set          ((uint32_t)0x00000001)
-#define DMA_CCR_ENABLE_Reset        ((uint32_t)0xFFFFFFFE)
+#define DMA_CCR_ENABLE_Set               ((uint32_t)0x00000001)
+#define DMA_CCR_ENABLE_Reset             ((uint32_t)0xFFFFFFFE)
 
 
 /* DMA2 FLAG mask */
-#define DMA_FLAG_Mask                ((uint32_t)0x10000000)
+#define DMA_FLAG_Mask                    ((uint32_t)0x10000000)
 
 /* DMA registers Masks */
-#define DMA_CCR_CLEAR_Mask           ((uint32_t)0xFFFF800F)
+#define DMA_CCR_CLEAR_Mask               ((uint32_t)0xFFFF800F)
 
 
 #ifdef HW_DMA_LOCAL
@@ -115,7 +115,7 @@
 #define HW_DMA_DEF                     extern
 #endif
 
-#define ADC1_DR_Address    ((uint32_t)0x4001244C)
+#define ADC1_DR_Address                  ((uint32_t)0x4001244C)
 
 
 HW_DMA_DEF void DMA_Start_Cmd(DMA_Channel_TypeDef* DMAy_Channelx, FunctionalState NewState);
