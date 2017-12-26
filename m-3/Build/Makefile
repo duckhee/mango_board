@@ -122,7 +122,7 @@ CFLAGS  = -gdwarf-2 -O2 -mcpu=cortex-m3 -mthumb-interwork -DSTM32F10X_MD
 #CFLAGS += -fsingle-precision-constant -Wdouble-promotion
 #CFLAGS += -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 
-#CFLAGS += $(INCLUDE) -mlong-calls -ffunction-sections -fdata-sections -fpromote-loop-indices -Wall -Wextra -Wimplicit -Wcast-align -Wpointer-arith -Wredundant-decls -msoft-float
+#CFLAGS += $(INCLUDE) -mlong-calls -ffunction-sections -fdata-sections -Wall -Wextra -Wimplicit -Wcast-align -Wpointer-arith -Wredundant-decls -msoft-float
 CFLAGS += $(INCLUDE) -mlong-calls -ffunction-sections -fdata-sections -Wall -Wextra -Wimplicit -Wcast-align -Wpointer-arith -Wredundant-decls 
 CFLAGS += -Wshadow -Wcast-qual -Wcast-align -Wa,-adhlns=start_stm32f10x.lst -MD -MP -MF $(TARGET).elf.d
 #header file add 경로는 자동으로 해서 참조
@@ -147,6 +147,7 @@ LDFLAGS = -static -nostdlib -nostartfiles -Wl,-Map=$(TARGET).map,--cref,--gc-sec
 #LDFLAGS += --specs=nano.specs -lc -lnosys
 #LDFLAGS += -u _printf_float
 #ELF32_LDFLAGS = -Wl,-T,stm32f10x.ld
+
 
 ELFSIZE = $(SIZE) -A $(TARGET).elf
 
