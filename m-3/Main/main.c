@@ -1,5 +1,6 @@
 #include "main.h"
 
+
 __IO uint16_t ADCConvertedValue;
 
 void DMA_Configuration(void)
